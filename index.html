@@ -9,7 +9,7 @@
     :root { color-scheme: dark; --bg:#080c18; --panel:#111a2e; --text:#f7f9ff; --muted:#aab9d3; --accent:#8b85ff; }
     * { box-sizing: border-box; }
     body { margin:0; min-height:100vh; background:radial-gradient(ellipse at 50% 0%, #242452 0%, var(--bg) 65%); color:var(--text); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-    header { max-width:1050px; margin:auto; padding:28px 24px; display:flex; align-items:center; justify-content:space-between; }
+    header { width:100%; padding:28px 24px; display:flex; align-items:center; justify-content:space-between; }
     .brand { font-size:1.45rem; font-weight:800; letter-spacing:-.04em; }
     header a { color:var(--muted); text-decoration:none; font-size:.92rem; }
     main { max-width:860px; margin:0 auto; padding:85px 24px 90px; text-align:center; }
@@ -72,14 +72,13 @@
     <a class="brand" href="#home">✦ Vexa</a>
     <nav aria-label="Main navigation">
       <a id="documentation-link" href="#docs">Documentation</a>
-      <a href="https://github.com/Avyukt-Gupta2012/Vexa" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     </nav>
   </header>
   <main id="home" tabindex="-1">
     <div class="eyebrow">A natural-language programming language</div>
     <h1>Programming,<br /><span>made natural.</span></h1>
     <p class="lead">Meet Vexa — a programming language built around readable, English-like syntax. Spend less time deciphering code and more time building ideas.</p>
-    <a class="download" href="https://github.com/Avyukt-Gupta2012/Vexa/releases/latest/download/VexaInstaller.pkg">↓ Download Vexa for macOS</a>
+    <a class="download" href="https://github.com/Avyukt-Gupta2012/Vexa/releases/latest">↓ Download Vexa for macOS</a>
     <p class="note">macOS installer (.pkg) · Includes the Vexa interpreter and VS Code extension setup</p>
     <div class="code-card">
       <div class="code-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="filename">hello.vexa</span></div>
