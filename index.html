@@ -1,302 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vexa is a programming language designed to make coding feel natural.">
-  <title>Vexa — Programming Made Natural</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Download Vexa, the English-like programming language for macOS." />
+  <title>Vexa — Programming, Made Natural</title>
   <style>
-    :root {
-      --bg: #080d1a;
-      --card: #141d30;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #818cf8;
-      --accent-hover: #6366f1;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont,
-                   "Segoe UI", sans-serif;
-      line-height: 1.6;
-    }
-
-    nav {
-      max-width: 1100px;
-      margin: auto;
-      padding: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      color: white;
-    }
-
-    .hero {
-      max-width: 850px;
-      margin: 100px auto 90px;
-      padding: 0 24px;
-      text-align: center;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 7px 16px;
-      border: 1px solid #373f66;
-      border-radius: 50px;
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    h1 {
-      font-size: clamp(48px, 9vw, 88px);
-      line-height: 1.1;
-      letter-spacing: -3px;
-      margin: 25px 0;
-    }
-
-    .gradient {
-      background: linear-gradient(90deg, #818cf8, #c084fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .subtitle {
-      font-size: 19px;
-      color: var(--muted);
-      max-width: 600px;
-      margin: 0 auto 32px;
-    }
-
-    .download {
-      display: inline-block;
-      padding: 16px 30px;
-      background: var(--accent);
-      color: #080d1a;
-      font-weight: 700;
-      font-size: 16px;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-
-    .download:hover {
-      background: #a5b4fc;
-      transform: translateY(-2px);
-    }
-
-    .note {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 16px;
-    }
-
-    .section {
-      max-width: 1000px;
-      margin: 0 auto 100px;
-      padding: 0 24px;
-    }
-
-    h2 {
-      font-size: 32px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .code-window {
-      background: #101827;
-      border: 1px solid #2b3751;
-      border-radius: 16px;
-      overflow: hidden;
-      max-width: 700px;
-      margin: auto;
-    }
-
-    .code-header {
-      background: #192338;
-      padding: 12px 20px;
-      font-size: 13px;
-      color: var(--muted);
-      border-bottom: 1px solid #2b3751;
-    }
-
-    pre {
-      margin: 0;
-      padding: 25px;
-      overflow-x: auto;
-      font-size: 15px;
-      line-height: 1.9;
-    }
-
-    code {
-      font-family: "SFMono-Regular", Consolas, monospace;
-      color: #c4b5fd;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-    }
-
-    .feature {
-      background: var(--card);
-      border: 1px solid #29354d;
-      border-radius: 16px;
-      padding: 25px;
-    }
-
-    .feature h3 {
-      margin-top: 0;
-      font-size: 19px;
-    }
-
-    .feature p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    footer {
-      border-top: 1px solid #253047;
-      padding: 30px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    @media (max-width: 600px) {
-      .hero {
-        margin-top: 65px;
-      }
-
-      h1 {
-        letter-spacing: -1px;
-      }
-    }
+    :root { color-scheme: dark; --bg:#080c18; --panel:#111a2e; --text:#f7f9ff; --muted:#aab9d3; --accent:#8b85ff; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background:radial-gradient(ellipse at 50% 0%, #242452 0%, var(--bg) 65%); color:var(--text); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    header { max-width:1050px; margin:auto; padding:28px 24px; display:flex; align-items:center; justify-content:space-between; }
+    .brand { font-size:1.45rem; font-weight:800; letter-spacing:-.04em; }
+    header a { color:var(--muted); text-decoration:none; font-size:.92rem; }
+    main { max-width:860px; margin:0 auto; padding:85px 24px 90px; text-align:center; }
+    .eyebrow { display:inline-block; padding:9px 15px; border:1px solid #45417f; border-radius:999px; color:#c7c4ff; font-size:.85rem; background:#ffffff09; }
+    h1 { margin:25px 0 16px; font-size:clamp(3rem,9vw,5.6rem); line-height:1.06; letter-spacing:-.065em; }
+    h1 span { color:#a6a0ff; }
+    .lead { max-width:620px; margin:0 auto; font-size:1.14rem; line-height:1.7; color:var(--muted); }
+    .download { display:inline-flex; align-items:center; justify-content:center; gap:10px; margin-top:32px; padding:17px 28px; border-radius:12px; background:var(--accent); color:#0b0d1c; text-decoration:none; font-weight:800; box-shadow:0 12px 45px #6862ff35; transition:transform .2s, background .2s; }
+    .download:hover { transform:translateY(-2px); background:#aaa5ff; }
+    .note { color:#8999b8; font-size:.88rem; margin-top:17px; }
+    .code-card { max-width:610px; margin:66px auto 0; text-align:left; background:#10182a; border:1px solid #293653; border-radius:17px; overflow:hidden; box-shadow:0 25px 75px #0005; }
+    .code-head { display:flex; align-items:center; gap:8px; border-bottom:1px solid #293653; padding:15px 20px; color:#9eacc6; font-size:.84rem; }
+    .dot { width:10px; height:10px; border-radius:50%; background:#ff7169; }
+    .dot:nth-child(2) { background:#f6c75a; } .dot:nth-child(3) { background:#56cc91; }
+    .filename { margin-left:12px; }
+    pre { margin:0; padding:28px; overflow-x:auto; font-size:1rem; line-height:1.8; color:#d9d4ff; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-top:35px; text-align:left; }
+    .feature { border:1px solid #263450; background:#ffffff06; border-radius:14px; padding:20px; }
+    .feature strong { display:block; margin-bottom:7px; } .feature p { margin:0; color:var(--muted); font-size:.91rem; line-height:1.55; }
+    footer { text-align:center; padding:25px; color:#8090ad; font-size:.85rem; border-top:1px solid #202a40; }
+    footer a { color:#b4afff; }
+    @media(max-width:650px) { main { padding-top:65px; } .features { grid-template-columns:1fr; } }
   </style>
 </head>
-
 <body>
-
-  <nav>
-    <div class="logo">Vexa.</div>
-    <a href="#features">Features</a>
-  </nav>
-
+  <header>
+    <div class="brand">✦ Vexa</div>
+    <a href="https://github.com/Avyukt-Gupta2012/Vexa" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+  </header>
   <main>
-    <section class="hero">
-      <span class="tag">Vexa Programming Language</span>
-
-      <h1>
-        Code Naturally.<br>
-        <span class="gradient">Build Anything.</span>
-      </h1>
-
-      <p class="subtitle">
-        Meet Vexa, a programming language designed around
-        readable, English-like syntax. Spend less time
-        decoding syntax and more time creating.
-      </p>
-
-      <a
-        class="download"
-        href="https://github.com/Avyukt-Gupta2012/Vexa/releases/latest/download/VexaInstaller.pkg"
-      >
-        ↓ Download for macOS
-      </a>
-
-      <p class="note">
-        macOS installer (.pkg) · VS Code integration
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>See Vexa in Action</h2>
-
-      <div class="code-window">
-        <div class="code-header">hello.vexa</div>
-        <pre><code>say "Hello, World!".
+    <div class="eyebrow">A natural-language programming language</div>
+    <h1>Programming,<br /><span>made natural.</span></h1>
+    <p class="lead">Meet Vexa — a programming language built around readable, English-like syntax. Spend less time deciphering code and more time building ideas.</p>
+    <a class="download" href="https://github.com/Avyukt-Gupta2012/Vexa/releases/latest/download/VexaInstaller.pkg">↓ Download Vexa for macOS</a>
+    <p class="note">macOS installer (.pkg) · Includes the Vexa interpreter and VS Code extension setup</p>
+    <div class="code-card">
+      <div class="code-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="filename">hello.vexa</span></div>
+      <pre><code>say "Hello, World!".
 
 let name be "Vexa".
 say name.</code></pre>
-      </div>
-    </section>
-
-    <section class="section" id="features">
-      <h2>Why Vexa?</h2>
-
-      <div class="features">
-        <div class="feature">
-          <h3>Readable Syntax</h3>
-          <p>
-            Write code using natural, English-like
-            statements that are easy to understand.
-          </p>
-        </div>
-
-        <div class="feature">
-          <h3>VS Code Support</h3>
-          <p>
-            Work with Vexa files using its dedicated
-            Visual Studio Code extension.
-          </p>
-        </div>
-
-        <div class="feature">
-          <h3>macOS Installer</h3>
-          <p>
-            Install the Vexa interpreter using a
-            convenient native macOS package.
-          </p>
-        </div>
-      </div>
+    </div>
+    <section class="features" aria-label="Features">
+      <div class="feature"><strong>Readable syntax</strong><p>Write code with straightforward, English-like statements.</p></div>
+      <div class="feature"><strong>VS Code support</strong><p>Use the Vexa extension for a better editing experience.</p></div>
+      <div class="feature"><strong>Built for macOS</strong><p>Get started with a single installer package.</p></div>
     </section>
   </main>
-
-  <footer>
-    <p>
-      Vexa Programming Language
-      · Created by Avyukt Gupta
-    </p>
-    <p>
-      <a href="https://github.com/Avyukt-Gupta2012/Vexa">
-        View on GitHub
-      </a>
-    </p>
-  </footer>
-
+  <footer>Vexa · Created by Avyukt Gupta · <a href="https://github.com/Avyukt-Gupta2012/Vexa/releases">View releases</a></footer>
 </body>
 </html>
