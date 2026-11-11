@@ -31,15 +31,51 @@
     .feature strong { display:block; margin-bottom:7px; } .feature p { margin:0; color:var(--muted); font-size:.91rem; line-height:1.55; }
     footer { text-align:center; padding:25px; color:#8090ad; font-size:.85rem; border-top:1px solid #202a40; }
     footer a { color:#b4afff; }
+    header nav { display:flex; align-items:center; gap:clamp(14px,4vw,28px); }
+    header a:hover, header a[aria-current] { color:var(--text); }
+    header .brand { color:var(--text); font-size:1.45rem; }
+    #docs { max-width:1050px; padding-top:42px; text-align:left; }
+    #docs h1 { margin:0 0 30px; font-size:clamp(2.6rem,7vw,4.5rem); }
+    .guide-layout { display:grid; grid-template-columns:230px minmax(0,1fr); gap:36px; align-items:start; }
+    .guide-layout aside { position:sticky; top:20px; }
+    .guide-contents { max-height:calc(100vh - 40px); overflow:auto; padding:18px; border:1px solid #293653; border-radius:14px; background:var(--panel); }
+    .guide-contents summary { cursor:pointer; font-weight:700; }
+    .guide-contents ul { list-style:none; margin:12px 0 0; padding:0; }
+    .guide-contents a { display:block; padding:5px 0; color:var(--muted); font-size:.88rem; text-decoration:none; }
+    .guide-contents a:hover { color:var(--text); text-decoration:underline; }
+    .guide-content { color:var(--muted); line-height:1.7; overflow-wrap:anywhere; }
+    .guide-content h2, .guide-content h3, .guide-content h4 { color:var(--text); line-height:1.25; scroll-margin-top:24px; }
+    .guide-content h2 { margin:48px 0 16px; padding-top:24px; border-top:1px solid #293653; font-size:clamp(1.55rem,4vw,2rem); }
+    .guide-content h2:first-child { margin-top:0; padding-top:0; border:0; }
+    .guide-content h3, .guide-content h4 { margin-top:28px; }
+    .guide-content a { color:#b4afff; }
+    .guide-content li + li { margin-top:5px; }
+    .guide-content pre, .guide-content .table-scroll { margin:18px 0; background:var(--panel); border:1px solid #293653; border-radius:12px; }
+    .guide-content pre { padding:16px 20px; font-size:.9rem; }
+    .guide-content :not(pre) > code { padding:.15em .35em; border-radius:4px; background:#242452; color:#d9d4ff; }
+    .table-scroll { overflow-x:auto; }
+    .guide-content table { width:100%; border-collapse:collapse; font-size:.92rem; }
+    .guide-content th, .guide-content td { padding:10px 12px; text-align:left; vertical-align:top; border-bottom:1px solid #293653; }
+    .guide-content th { background:#19243b; color:var(--text); }
+    .guide-content tr:last-child td { border-bottom:0; }
+    @media(max-width:760px) {
+      .guide-layout { grid-template-columns:minmax(0,1fr); gap:26px; }
+      .guide-layout aside { position:static; }
+      .guide-contents { max-height:none; }
+      .guide-contents ul { max-height:15rem; overflow:auto; }
+    }
     @media(max-width:650px) { main { padding-top:65px; } .features { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">✦ Vexa</div>
-    <a href="https://github.com/Avyukt-Gupta2012/Vexa" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    <a class="brand" href="#home">✦ Vexa</a>
+    <nav aria-label="Main navigation">
+      <a id="documentation-link" href="#docs">Documentation</a>
+      <a href="https://github.com/Avyukt-Gupta2012/Vexa" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </nav>
   </header>
-  <main>
+  <main id="home" tabindex="-1">
     <div class="eyebrow">A natural-language programming language</div>
     <h1>Programming,<br /><span>made natural.</span></h1>
     <p class="lead">Meet Vexa — a programming language built around readable, English-like syntax. Spend less time deciphering code and more time building ideas.</p>
@@ -58,6 +94,2356 @@ say name.</code></pre>
       <div class="feature"><strong>Built for macOS</strong><p>Get started with a single installer package.</p></div>
     </section>
   </main>
+  <main id="docs" aria-labelledby="docs-title" tabindex="-1" hidden>
+    <h1 id="docs-title">Learning Vexa</h1>
+    <div class="guide-layout">
+      <aside>
+        <details class="guide-contents" open>
+          <summary>On this page</summary>
+          <ul>
+            <li><a href="#docs-1-what-vexa-is">1. What Vexa is</a></li>
+            <li><a href="#docs-2-getting-started">2. Getting started</a></li>
+            <li><a href="#docs-3-syntax-essentials">3. Syntax essentials</a></li>
+            <li><a href="#docs-4-variables-and-data-types">4. Variables and data types</a></li>
+            <li><a href="#docs-5-operators-and-precedence">5. Operators and precedence</a></li>
+            <li><a href="#docs-6-input-and-output">6. Input and output</a></li>
+            <li><a href="#docs-7-conditionals">7. Conditionals</a></li>
+            <li><a href="#docs-8-loops">8. Loops</a></li>
+            <li><a href="#docs-9-functions-and-scope">9. Functions and scope</a></li>
+            <li><a href="#docs-10-lists">10. Lists</a></li>
+            <li><a href="#docs-11-every-built-in-function">11. Every built-in function</a></li>
+            <li><a href="#docs-12-errors-and-debugging">12. Errors and debugging</a></li>
+            <li><a href="#docs-13-complete-practical-programs">13. Complete practical programs</a></li>
+            <li><a href="#docs-14-practice-exercises">14. Practice exercises</a></li>
+            <li><a href="#docs-15-exercise-solutions">15. Exercise solutions</a></li>
+            <li><a href="#docs-16-quick-reference">16. Quick reference</a></li>
+            <li><a href="#docs-17-desktop-gui-reference">17. Desktop GUI reference</a></li>
+            <li><a href="#docs-18-working-with-csv-files-and-tables">18. Working with CSV Files and Tables</a></li>
+            <li><a href="#docs-19-arrays-and-numerical-computing">19. Arrays and Numerical Computing</a></li>
+            <li><a href="#docs-20-machine-learning-with-vexa">20. Machine Learning with Vexa</a></li>
+            <li><a href="#docs-21-classes-and-objects">21. Classes and objects</a></li>
+            <li><a href="#docs-22-modules-and-imports">22. Modules and Imports</a></li>
+          </ul>
+        </details>
+      </aside>
+      <!-- Rendered from Vexa/LANGUAGE_GUIDE.md. Refresh this section when the guide changes. -->
+      <article class="guide-content">
+<h2 id="docs-1-what-vexa-is">1. What Vexa is</h2>
+<p>Vexa is a small, interpreted programming language with natural-English statements.
+You write <code>let score be 10.</code> and <code>if score is greater than 5 then { ... }</code>.
+Its English phrases are precise syntax, not free-form English: spelling, word
+order, and lowercase keywords matter.</p>
+<p>The interpreter reads the whole file, turns text into tokens, parses an abstract
+syntax tree (AST), and executes that tree. Syntax errors are found before any
+statement runs. Runtime errors stop execution when reached; earlier effects remain.
+There is no compilation step. The core language has no third-party dependency; optional tables use pandas, numerical arrays use NumPy, and machine learning uses PyTorch.</p>
+<p>Terminal programs, functions, classes, lists, and optional Tkinter desktop widgets work
+today. Vexa programs can import other Vexa source files (<a href="#docs-22-modules-and-imports">section 22</a>).
+Vexa has no exception handling or general file-access functions. Section 20 adds explicit allowlisted
+PyTorch module access and model/tensor serialization. <code>use gui.</code> enables the GUI library; <code>use pandas.</code> enables the CSV/table phrases in section 18; <code>use numpy.</code> enables arrays in section 19; <code>use pytorch.</code> enables machine learning in section 20.</p>
+<h2 id="docs-2-getting-started">2. Getting started</h2>
+<h3 id="docs-installation">Installation</h3>
+<p>Use the <a href="#home">Vexa download page</a> to choose a Windows or macOS
+installer. The installer includes a private Python runtime and an offline copy
+of this guide. See <a href="#docs-installation">installation and troubleshooting</a> for platform
+requirements, VS Code setup, and optional libraries.</p>
+<p>Create a UTF-8 text file called <code>hello.vexa</code>:</p>
+<pre><code class="language-vexa">say &quot;Hello, World!&quot;.
+</code></pre>
+<p>From the same folder, run:</p>
+<pre><code class="language-bash">vexa hello.vexa
+</code></pre>
+<p>To run from source, use Python 3.10 or newer and run
+<code>python3 interpreter.py hello.vexa</code> from the directory containing the interpreter,
+or give the path to <code>interpreter.py</code>. Substitute <code>python</code> or <code>py</code> where appropriate.</p>
+<p>It prints <code>Hello, World!</code> followed by a newline. Paths may be absolute or relative
+to your terminal's current folder; quote paths containing spaces. The <code>.vexa</code>
+suffix is the convention (the interpreter does not enforce the extension).
+A successful run exits with status 0; an interpreter/file error exits with status 1.
+A filename is required: there is no interactive REPL.</p>
+<p>To run the automated suite (pandas-specific tests skip if unavailable) from the Vexa folder:</p>
+<pre><code class="language-bash">python3 -m unittest discover -v
+</code></pre>
+<h2 id="docs-3-syntax-essentials">3. Syntax essentials</h2>
+<p>Simple statements end with a period. Newlines and indentation make programs
+readable but do not end statements. Several statements can share a line, and an
+expression can span lines. Blocks use <code>{</code> and <code>}</code>. <code>if</code>, loops, <code>class</code>, and <code>define</code>
+end at their closing brace; <strong>do not put a period after the brace</strong>.</p>
+<pre><code class="language-vexa"># This is a comment, lasting until the end of the line.
+let message be &quot;# inside a string is text&quot;.
+if true then {
+    say message. # A simple statement still needs its period.
+}
+</code></pre>
+<p>Empty blocks, empty lists, and empty argument lists are valid. Commas separate
+parameters, arguments, and list elements; trailing commas are not supported.
+A standalone block is not a statement.</p>
+<p>Names contain ASCII letters, digits, and underscores, and cannot start with a
+digit. <code>total</code>, <code>total_2</code>, and <code>_count</code> are valid. Names are case-sensitive:
+<code>score</code> and <code>Score</code> are different. Reserved keywords cannot be names. Built-in
+function names are ordinary names, so avoid reusing them unless intentional.</p>
+<h3 id="docs-decimal-points-versus-terminating-periods">Decimal points versus terminating periods</h3>
+<p>A period immediately after digits belongs to a number <strong>only when followed by
+another digit</strong>. Therefore <code>say 3.14.</code> contains the decimal number <code>3.14</code> and a
+separate terminating period. <code>say 3.</code> prints the integer <code>3</code>; that period ends
+the statement. Write <code>3.0</code> for a floating-point literal.</p>
+<pre><code class="language-vexa">say 3.14.
+say 3.
+say 3.0.
+say &quot;Version 1.2&quot;.
+</code></pre>
+<p>These print <code>3.14</code>, <code>3</code>, <code>3.0</code>, and <code>Version 1.2</code>. Literal <code>.5</code> is unsupported:
+write <code>0.5</code>. Literal <code>1e3</code> is unsupported: write <code>1000</code> or use
+<code>to_float(&quot;1e3&quot;)</code>. A number cannot have several fractional parts or an adjacent
+identifier suffix. Periods inside strings or comments have no terminating role.</p>
+<h2 id="docs-4-variables-and-data-types">4. Variables and data types</h2>
+<p><code>let name be value.</code> creates a binding. <code>set name to value.</code> changes an existing
+binding. Using <code>set</code> on an unknown name is an error; declaring the same local
+name twice is also an error. Variables can later hold a different type.</p>
+<pre><code class="language-vexa">let score be 10.
+set score to score + 5.
+let greeting be &quot;Hello&quot;.
+let ready be true.
+let result be null.
+say score.
+set result to greeting.
+say result.
+</code></pre>
+<p>The output is <code>15</code> and <code>Hello</code>. The initializer/right side is evaluated before
+its value is stored. Assignment resolves its destination before evaluating the
+right side, so an unknown destination fails first.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Value kind</th>
+<th>Examples</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer</td>
+<td><code>0</code>, <code>42</code>, <code>-8</code></td>
+<td>Minus is a unary operator, not part of the literal.</td>
+</tr>
+<tr>
+<td>Floating-point number</td>
+<td><code>0.5</code>, <code>12.0</code></td>
+<td>Finite binary floating-point, with rounding limits.</td>
+</tr>
+<tr>
+<td>String</td>
+<td><code>&quot;Hello&quot;</code>, <code>&quot;&quot;</code></td>
+<td>Unicode text, double quotes required.</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Distinct from numbers; <code>true</code> is not <code>1</code>.</td>
+</tr>
+<tr>
+<td>Null</td>
+<td><code>null</code></td>
+<td>Absence of a result.</td>
+</tr>
+<tr>
+<td>List</td>
+<td><code>[1, &quot;two&quot;, null]</code></td>
+<td>Ordered, mutable values; may be nested.</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>A defined function or built-in</td>
+<td>Can be stored, passed, and returned.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Strings support exactly <code>\n</code> (newline), <code>\r</code> (carriage return), <code>\t</code> (tab),
+<code>\&quot;</code> (quote), and <code>\\</code> (backslash). Raw newlines inside a string and unknown
+escapes are errors. There is no interpolation; concatenate with <code>+</code>.</p>
+<pre><code class="language-vexa">say &quot;First\nSecond&quot;.
+say &quot;A quote: \&quot; and a backslash: \\&quot;.
+</code></pre>
+<p>Integers use Python's integer representation; floats use Python's float
+precision. Very large integers, deep recursion, and deeply nested expressions
+remain subject to host limits. Floating-point results such as <code>0.1 + 0.2</code> can
+have rounding artifacts; do not assume exact decimal accounting arithmetic.</p>
+<h2 id="docs-5-operators-and-precedence">5. Operators and precedence</h2>
+<p>Arithmetic operators are <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, and <code>^</code> (power). <code>/</code> produces
+a float even for <code>4 / 2</code>. <code>%</code> is remainder, with the divisor's sign:
+<code>-7 % 3</code> is <code>2</code>. <code>+</code> also joins two strings or two lists. Other arithmetic
+requires numbers. Booleans do not count as numbers. There is no implicit
+conversion: use <code>&quot;Score: &quot; + to_string(score)</code>, not <code>&quot;Score: &quot; + score</code>.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Comparison</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a is equal to b</code></td>
+<td>Equality</td>
+</tr>
+<tr>
+<td><code>a is not equal to b</code></td>
+<td>Inequality</td>
+</tr>
+<tr>
+<td><code>a is greater than b</code></td>
+<td>Greater</td>
+</tr>
+<tr>
+<td><code>a is less than b</code></td>
+<td>Less</td>
+</tr>
+<tr>
+<td><code>a is greater than or equal to b</code></td>
+<td>Greater or equal</td>
+</tr>
+<tr>
+<td><code>a is less than or equal to b</code></td>
+<td>Less or equal</td>
+</tr>
+</tbody>
+</table></div>
+<p>Equality compares lists structurally, including nested values. Integers and
+floats can be numerically equal (<code>1 is equal to 1.0</code>), but booleans and numbers
+are distinct. Different value types compare unequal otherwise. Functions compare
+by identity. Ordering requires two numbers or two strings; strings compare
+lexicographically by Unicode code points. Lists cannot be ordered.</p>
+<p>Use <code>and</code>, <code>or</code>, and <code>not</code> for logic. All evaluated logical operands and
+conditions must be booleans, not numbers, strings, lists, or null. <code>and</code> and <code>or</code>
+short-circuit: they skip their right operand when the left determines the result.</p>
+<pre><code class="language-vexa">say 2 + 3 * 4.              # 14
+say (2 + 3) * 4.            # 20
+say 2 ^ 3 ^ 2.              # 512
+say -2 ^ 2.                 # -4
+say 2 ^ -2.                 # 0.25
+say not 3 is equal to 4.     # true
+say false and missing.      # false; missing is never looked up
+say true or false and false. # true
+say 3 is greater than or equal to 3.
+</code></pre>
+<p>Precedence from <strong>lowest to highest</strong>:</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Operators</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>or</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>and</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>not</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>English comparison phrases</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>+</code>, <code>-</code> (binary)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>*</code>, <code>/</code>, <code>%</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Unary <code>+</code>, <code>-</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>^</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Function call <code>(...)</code>, list index <code>[...]</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Parentheses override precedence. Power groups to the right; other binary
+arithmetic and logical operators group to the left. Power accepts a unary
+exponent, which is why <code>2 ^ -2</code> works. Comparisons do not chain: write
+<code>x is greater than 0 and x is less than 10</code>, rather than joining three operands
+with comparison phrases. Neither <code>==</code> nor <code>!=</code> nor symbolic ordering is supported.
+Division by zero, nonfinite numbers, and complex results are errors.</p>
+<h2 id="docs-6-input-and-output">6. Input and output</h2>
+<p><code>say expression.</code> prints a value followed by a newline. Strings print without
+quotes; booleans and null print lowercase. Lists print with brackets and quoted,
+escaped string elements. Functions print as <code>&lt;function&gt;</code>.</p>
+<p><code>print expression.</code> uses the same formatting but adds <strong>no newline</strong>, like
+Java's <code>System.out.print()</code>. <code>say</code> adds a newline, like <code>System.out.println()</code>.
+Both accept variables and expressions and require a terminating period.</p>
+<pre><code class="language-vexa">print &quot;Hello &quot;.
+say &quot;World!&quot;.
+let score be 42.
+print &quot;Score: &quot; + to_string(score).
+</code></pre>
+<p>This produces <code>Hello World!</code> on one line, followed by <code>Score: 42</code> on the next
+line with no newline after <code>42</code>. Use <code>say</code> when output should end a line.</p>
+<p><code>ask prompt into name.</code> prints a string prompt without a newline, flushes it,
+and reads one line as a <strong>string</strong>, removing the line ending. An empty line is
+valid. End of input is an error. It updates the nearest existing binding, or
+creates one in the current scope if absent.</p>
+<pre><code class="language-vexa"># test-input: [&quot;Alex&quot;, &quot;20&quot;]
+ask &quot;Name? &quot; into name.
+ask &quot;Age? &quot; into age_text.
+let age be to_int(age_text).
+say &quot;Hello, &quot; + name + &quot;. Next year: &quot; + to_string(age + 1).
+</code></pre>
+<p>Enter <code>Alex</code> and <code>20</code> when prompted. The final line says
+<code>Hello, Alex. Next year: 21</code>. The <code>test-input</code> comment supplies automated test
+input; it has no special meaning to Vexa.</p>
+<p><code>to_int</code> and <code>to_float</code> parse strings only. They trim surrounding whitespace.
+<code>to_int(&quot;12&quot;)</code> returns an integer; it does not truncate <code>&quot;12.5&quot;</code>.
+<code>to_float(&quot;12.5&quot;)</code> returns a float and also accepts exponent strings like
+<code>&quot;1e2&quot;</code>. <code>to_string(value)</code> returns the same representation used by <code>say</code> and <code>print</code>.
+There is no boolean-conversion built-in. Invalid input stops the program; Vexa
+currently has no try/catch or built-in validation predicate for numeric text.</p>
+<h2 id="docs-7-conditionals">7. Conditionals</h2>
+<p>An <code>if</code> requires <code>then</code> and a boolean condition. The first matching branch runs.
+An optional <code>else if</code> checks another condition; <code>else</code> runs when none matched.</p>
+<pre><code class="language-vexa">let age be 18.
+if age is greater than 18 then {
+    say &quot;Over 18&quot;.
+} else if age is equal to 18 then {
+    say &quot;Exactly 18&quot;.
+} else {
+    say &quot;Under 18&quot;.
+}
+if age is greater than or equal to 18 then {
+    if age is less than 65 then { say &quot;Working-age adult&quot;. }
+}
+</code></pre>
+<p>This prints <code>Exactly 18</code> and <code>Working-age adult</code>. Conditions can contain
+comparisons combined with <code>and</code>, <code>or</code>, and <code>not</code>. Untaken branches are not
+executed, though their syntax is still checked.</p>
+<h2 id="docs-8-loops">8. Loops</h2>
+<h3 id="docs-while">While</h3>
+<p><code>while condition { ... }</code> checks its boolean condition before each iteration.
+Update the variables that control it so it can finish.</p>
+<pre><code class="language-vexa">let n be 1.
+while n is less than or equal to 3 {
+    say n.
+    set n to n + 1.
+}
+</code></pre>
+<p>This prints <code>1</code>, <code>2</code>, <code>3</code>. A false initial condition means zero iterations.</p>
+<h3 id="docs-repeat">Repeat</h3>
+<p><code>repeat count times { ... }</code> evaluates its count once. The count must be a
+nonnegative integer; <code>3.0</code> and <code>true</code> are invalid counts. Zero does nothing.
+There is no implicit loop counter; create one if needed.</p>
+<pre><code class="language-vexa">let count be 0.
+repeat 3 times {
+    set count to count + 1.
+    say count.
+}
+</code></pre>
+<h3 id="docs-counter-based-for-loops">Counter-Based For Loops</h3>
+<p><code>for name from start to end step amount { ... }</code> creates a local tracking
+variable and advances it automatically. The start is inclusive and the end is
+exclusive. Omit <code>step amount</code> to use a step of <code>1</code>.</p>
+<pre><code class="language-vexa">for i from 0 to 10 { say i. }          # 0 through 9
+for i from 0 to 10 step 2 { say i. }   # 0, 2, 4, 6, 8
+for i from 10 to 0 step -2 { say i. }  # 10, 8, 6, 4, 2
+</code></pre>
+<p>Start, end, and step expressions are evaluated once, in that order, before
+creating the tracking variable. Each must evaluate to an integer; booleans and
+floats such as <code>1.0</code> are rejected. A zero step raises a runtime error, including
+when the bounds would otherwise produce no iterations. Equal bounds or a step
+pointing away from the end produce no iterations.</p>
+<p>Nested loops create independent bindings, and outer bindings keep their values:</p>
+<pre><code class="language-vexa">let i be 99.
+for i from 0 to 2 {
+    for j from 0 to 3 {
+        say i * 3 + j.
+    }
+}
+say i. # 99; j is unavailable here
+</code></pre>
+<p><code>continue.</code> advances the counter before the next iteration, and <code>break.</code> exits
+the nearest loop. Assigning to the tracking variable changes its visible value
+for the rest of that iteration; the next iteration still follows the original
+automatic progression. The body shares the loop's local scope across iterations.
+Other existing outer variables can be updated with <code>set</code>; bindings created in
+the loop are unavailable afterward. See the <a href="Vexa/LAUNCH_GUIDE.md#counter-based-for-loops">launch guide</a>
+for editor support and more examples.</p>
+<h3 id="docs-for-each">For each</h3>
+<p><code>for each name in list { ... }</code> visits a shallow snapshot of a list. Strings
+are not iterable in this construct. The list expression is evaluated once.</p>
+<pre><code class="language-vexa">let values be [10, 20, 30].
+for each value in values {
+    say value.
+    append(values, 99).
+}
+say length(values).
+say value.
+</code></pre>
+<p>This prints <code>10</code>, <code>20</code>, <code>30</code>, <code>6</code>, and <code>30</code>. Appending does not add iterations.
+The iteration binding is in the current scope and remains afterward. It updates
+an existing local binding or shadows an outer one. An empty list creates no
+binding and leaves existing bindings unchanged. The snapshot copies only the
+outer list; mutations to nested shared lists remain visible.</p>
+<h3 id="docs-break-and-continue">Break and continue</h3>
+<p><code>break.</code> leaves the innermost loop. <code>continue.</code> skips to its next iteration
+(and a <code>while</code> loop checks its condition again). Neither is allowed outside a
+loop, even in an unreachable branch. A function cannot break its caller's loop.</p>
+<pre><code class="language-vexa">let n be 0.
+while true {
+    set n to n + 1.
+    if n is equal to 2 then { continue. }
+    if n is equal to 4 then { break. }
+    say n.
+}
+</code></pre>
+<p>The output is <code>1</code>, <code>3</code>. Beware that braces do not create local scopes: a <code>let</code>
+inside a loop would attempt to declare the same name again on the next iteration.
+Declare accumulators before the loop and update them with <code>set</code>.</p>
+<h2 id="docs-9-functions-and-scope">9. Functions and scope</h2>
+<p>Optionally declare a return type after the parameters:</p>
+<pre><code class="language-vexa">define square with (x) -&gt; int {
+    return x * x.
+}
+say square(5).
+</code></pre>
+<p>Supported return types are <code>int</code>, <code>float</code>, <code>string</code>, <code>bool</code>, <code>null</code>, <code>list</code>, and <code>tensor</code>.
+<code>tensor</code> accepts genuine PyTorch tensors (including parameters) after <code>use pytorch.</code>.
+Matching is exact: <code>bool</code> is distinct from <code>int</code>, and an <code>int</code> does not match
+<code>float</code>. List annotations check the list itself, not its elements. Every executed
+return is checked; finishing without a return produces <code>null</code>, which must also
+match the annotation. Mismatches report a runtime error with a source location;
+unknown annotation names are syntax errors. Annotations are optional and do not
+change function calls or lexical scope.</p>
+<p>Define a function with <code>define name with (parameters) { ... }</code>. Call it with
+<code>name(arguments)</code>. Arguments use commas, and the argument count must exactly
+match the parameter count. Duplicate parameter names are invalid.</p>
+<pre><code class="language-vexa">define add with (a, b) {
+    return a + b.
+}
+say add(3, 4).
+define greet with () { say &quot;Hello&quot;. }
+greet().
+say greet().
+</code></pre>
+<p>This prints <code>7</code>, <code>Hello</code>, <code>Hello</code>, and <code>null</code>. A call can be an expression or
+a statement whose result is discarded. <code>return expression.</code> immediately leaves
+the current function, including nested loops. <code>return null.</code> is an explicit
+empty result; bare <code>return.</code> is unsupported. Falling off the body returns null.
+<code>return</code> is invalid outside functions, including unreachable branches.</p>
+<h3 id="docs-recursion">Recursion</h3>
+<p>A function can call itself after its definition has executed. Include a base
+case that stops the recursion.</p>
+<pre><code class="language-vexa">define factorial with (n) {
+    if n is less than or equal to 1 then { return 1. }
+    return n * factorial(n - 1).
+}
+say factorial(5).
+</code></pre>
+<p>This prints <code>120</code>. Recursive calls get separate parameter and local bindings.
+Deep recursion hits a host limit; Vexa does not optimize tail calls.</p>
+<h3 id="docs-lexical-scope-and-closures">Lexical scope and closures</h3>
+<p>The program has a scope. Each function call has a new child scope of the scope
+where the function was <strong>defined</strong>, not where it was called. Blocks share their
+enclosing scope. <code>let</code> and <code>define</code> reject a duplicate in the current scope but
+can shadow an outer name. <code>set</code> changes the nearest existing name. Parameters
+are local bindings, so redeclaring a parameter with <code>let</code> fails.</p>
+<pre><code class="language-vexa">let x be 10.
+define read with () { return x. }
+define caller with (x) { return read(). }
+say caller(99).
+if true then { let visible be &quot;blocks share scope&quot;. }
+say visible.
+define make_counter with (start) {
+    define next with () {
+        set start to start + 1.
+        return start.
+    }
+    return next.
+}
+let counter be make_counter(0).
+say counter().
+say counter().
+</code></pre>
+<p>This prints <code>10</code>, <code>blocks share scope</code>, <code>1</code>, <code>2</code>. The returned function retains
+its defining environment (a closure). Changes to captured bindings remain
+visible; environments are not frozen copies. Functions and built-ins are values,
+so they can also be passed as arguments or stored in lists. Calls evaluate the
+callee first, then arguments from left to right.</p>
+<p>Definitions execute in order: calling a function before its <code>define</code> runs is an
+undefined-name error. A function may refer to another function defined later,
+provided that other definition has executed by the time the reference is used.
+Built-ins occupy a parent of program scope and can be shadowed with <code>let</code>.</p>
+<h2 id="docs-10-lists">10. Lists</h2>
+<p>List literals use brackets and may mix types or contain other lists. Indices
+start at zero and must be nonnegative, in-range <strong>integers</strong>: neither <code>true</code>
+nor <code>0.0</code> is a valid index. Only lists support indexing; strings do not.</p>
+<pre><code class="language-vexa">let fruits be [&quot;apple&quot;, &quot;banana&quot;].
+say fruits[0].
+set fruits[1] to &quot;mango&quot;.
+append(fruits, &quot;pear&quot;).
+for each fruit in fruits { say fruit. }
+say pop(fruits).
+say length(fruits).
+let rows be [[1, 2], [3, 4]].
+set rows[0][1] to 9.
+say rows.
+</code></pre>
+<p><code>set</code> replaces an existing element; it does not grow the list. <code>append</code> adds at
+the end; <code>pop</code> removes and returns the last element. Popping an empty list fails.
+There are no slices, negative indices, or list methods such as <code>fruits.append</code>.</p>
+<p>Assignment and function arguments share list references. Concatenation creates
+a new outer list, but nested elements are still shared (a shallow copy).</p>
+<pre><code class="language-vexa">let original be [[1]].
+let alias be original.
+let joined be original + [2].
+set alias[0][0] to 9.
+say original.
+say joined.
+</code></pre>
+<p>This prints <code>[[9]]</code> and <code>[[9], 2]</code>. To modify a list in a function, pass it as
+an argument and call <code>append</code>, <code>pop</code>, or indexed <code>set</code>. Rebinding a parameter
+with <code>set</code> changes that parameter, not the caller's variable.</p>
+<p>Indexed assignment resolves its list and index before evaluating the right
+side. If that evaluation changes list length, bounds are checked again before
+storing. Cyclic lists are permitted: display uses a <code>[...]</code> recursion marker,
+and equality handles cycles. Deep acyclic nesting still has a host depth limit.</p>
+<h2 id="docs-11-every-built-in-function">11. Every built-in function</h2>
+<p>The 14 terminal built-ins are ordinary callable bindings. They require exactly the listed
+number of arguments. Numeric parameters accept integers or floats unless marked
+integer-only; booleans never count as numbers. Domain/type/arity errors stop
+execution with a diagnostic.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Function and parameters</th>
+<th>Return value and behavior</th>
+<th>Example expression → result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>random(low, high)</code></td>
+<td>Integer uniformly chosen between inclusive integer bounds; <code>low &lt;= high</code> required.</td>
+<td><code>random(7, 7)</code> → <code>7</code></td>
+</tr>
+<tr>
+<td><code>to_int(text)</code></td>
+<td>Integer parsed from a signed decimal string; trims surrounding whitespace.</td>
+<td><code>to_int(&quot; -42 &quot;)</code> → <code>-42</code></td>
+</tr>
+<tr>
+<td><code>to_float(text)</code></td>
+<td>Finite float parsed from a signed decimal string, optionally with exponent; trims whitespace.</td>
+<td><code>to_float(&quot;1.25e2&quot;)</code> → <code>125.0</code></td>
+</tr>
+<tr>
+<td><code>to_string(value)</code></td>
+<td>String using Vexa's display representation; accepts any value.</td>
+<td><code>to_string(true)</code> → <code>&quot;true&quot;</code></td>
+</tr>
+<tr>
+<td><code>length(value)</code></td>
+<td>Integer count of list elements or Unicode code points in a string.</td>
+<td><code>length(&quot;hello&quot;)</code> → <code>5</code></td>
+</tr>
+<tr>
+<td><code>abs(number)</code></td>
+<td>Nonnegative magnitude, preserving integer/float kind.</td>
+<td><code>abs(-3)</code> → <code>3</code></td>
+</tr>
+<tr>
+<td><code>sqrt(number)</code></td>
+<td>Float square root; input must be nonnegative and within host range.</td>
+<td><code>sqrt(9)</code> → <code>3.0</code></td>
+</tr>
+<tr>
+<td><code>floor(number)</code></td>
+<td>Integer rounded toward negative infinity.</td>
+<td><code>floor(-1.2)</code> → <code>-2</code></td>
+</tr>
+<tr>
+<td><code>ceil(number)</code></td>
+<td>Integer rounded toward positive infinity.</td>
+<td><code>ceil(1.2)</code> → <code>2</code></td>
+</tr>
+<tr>
+<td><code>round(number)</code></td>
+<td>Nearest integer; exact halfway cases go to the even integer.</td>
+<td><code>round(2.5)</code> → <code>2</code></td>
+</tr>
+<tr>
+<td><code>min(a, b)</code></td>
+<td>Smaller of two numbers (first on a tie).</td>
+<td><code>min(2, 1)</code> → <code>1</code></td>
+</tr>
+<tr>
+<td><code>max(a, b)</code></td>
+<td>Larger of two numbers (first on a tie).</td>
+<td><code>max(2, 3)</code> → <code>3</code></td>
+</tr>
+<tr>
+<td><code>append(items, value)</code></td>
+<td>Null; mutates list <code>items</code> by adding any value at the end.</td>
+<td><code>append(items, 4)</code> adds <code>4</code></td>
+</tr>
+<tr>
+<td><code>pop(items)</code></td>
+<td>Last element, removed from nonempty list <code>items</code>.</td>
+<td><code>pop([1, 2])</code> → <code>2</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Conversions reject empty strings, underscores, nondecimal base prefixes, and
+nonfinite results. <code>to_int</code> accepts digits with an optional sign, not a fractional
+part or exponent. <code>to_float</code> additionally accepts strings like <code>&quot;.5&quot;</code>, <code>&quot;3.&quot;</code>,
+and <code>&quot;1e-2&quot;</code>; these conversion inputs have different rules from source literals.
+<code>round(3.5)</code> is <code>4</code>. <code>length</code> counts Unicode code points rather than displayed
+grapheme clusters. Random values are not a cryptographic randomness API.</p>
+<p>Here is a complete built-in tour:</p>
+<pre><code class="language-vexa">say random(7, 7).
+say to_int(&quot; -42 &quot;).
+say to_float(&quot;1.25e2&quot;).
+say to_string(true).
+say length(&quot;hello&quot;).
+say abs(-3).
+say sqrt(9).
+say floor(-1.2).
+say ceil(1.2).
+say round(2.5).
+say min(2, 1).
+say max(2, 3).
+let items be [1, 2].
+say append(items, 4).
+say pop(items).
+say items.
+</code></pre>
+<p>The last three lines print <code>null</code>, <code>4</code>, and <code>[1, 2]</code>. Use <code>append(items, 4).</code>
+as a statement when its null return value is unneeded.</p>
+<h2 id="docs-12-errors-and-debugging">12. Errors and debugging</h2>
+<p>Command-line diagnostics look like <code>myprogram.vexa:2:7: Division by zero</code>:
+filename, one-based line, one-based column, and explanation. Parser errors also
+identify the unexpected token or end of input. Runtime locations point to the
+relevant statement/operator/call, and deep-runtime-limit errors may point to the
+containing top-level statement. There is currently no Vexa stack trace.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Error or symptom</th>
+<th>Likely cause and repair</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Expected '.' after statement</code></td>
+<td>Add a period after a simple statement; inspect the preceding line too.</td>
+</tr>
+<tr>
+<td><code>Expected '}' to close block</code></td>
+<td>Match each opening brace with a closing one.</td>
+</tr>
+<tr>
+<td>Unexpected period after <code>}</code></td>
+<td>Remove it from a compound statement.</td>
+</tr>
+<tr>
+<td><code>Unterminated string</code></td>
+<td>Close double quotes; use <code>\n</code> for embedded newlines.</td>
+</tr>
+<tr>
+<td><code>Invalid string escape</code></td>
+<td>Use only the five documented escapes.</td>
+</tr>
+<tr>
+<td>Invalid numeric literal</td>
+<td>Use <code>0.5</code>, no exponent literal, no adjacent identifier suffix.</td>
+</tr>
+<tr>
+<td><code>Undefined name</code></td>
+<td>Check spelling/case and define the name before using or setting it.</td>
+</tr>
+<tr>
+<td><code>Duplicate binding</code></td>
+<td>Use <code>set</code> to update; move <code>let</code> outside a repeating loop.</td>
+</tr>
+<tr>
+<td>Logical operands must be booleans</td>
+<td>Write a comparison instead of using a number as a condition.</td>
+</tr>
+<tr>
+<td>Arithmetic requires numbers</td>
+<td>Convert text explicitly; concatenate two strings, not text and a number.</td>
+</tr>
+<tr>
+<td><code>Division by zero</code></td>
+<td>Check the divisor before <code>/</code> or <code>%</code>; zero to a negative power also fails.</td>
+</tr>
+<tr>
+<td>Invalid numeric input</td>
+<td>Enter valid decimal text; conversions accept strings only.</td>
+</tr>
+<tr>
+<td>List index out of range</td>
+<td>Check <code>0 &lt;= index &lt; length</code> using English comparisons joined by <code>and</code>.</td>
+</tr>
+<tr>
+<td>Incorrect argument count</td>
+<td>Match the function's parameters exactly.</td>
+</tr>
+<tr>
+<td>Invalid <code>break</code>, <code>continue</code>, <code>return</code></td>
+<td>Put them in the appropriate loop/function; unreachable code is still parsed.</td>
+</tr>
+<tr>
+<td>Recursion/nesting limit</td>
+<td>Reduce nesting or use an iterative algorithm and a terminating base case.</td>
+</tr>
+<tr>
+<td>End of input while reading ask</td>
+<td>Supply all requested lines through the terminal or redirected input.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Start with the first diagnostic. Add <code>say</code> statements before the failing step
+to inspect values; run a smaller program to isolate the problem. Syntax errors
+prevent all execution, while runtime failures can follow earlier output/mutations.
+There is no automatic rollback. Use a comparison to guard a risky operation:</p>
+<pre><code class="language-vexa">let divisor be 0.
+if divisor is not equal to 0 then {
+    say 10 / divisor.
+} else {
+    say &quot;Cannot divide by zero&quot;.
+}
+</code></pre>
+<p>Memory exhaustion, infinite loops, and extreme host resource use are not sandboxed
+or automatically timed out. Normal syntax/type/numeric errors receive Vexa
+diagnostics; resource limits do not make arbitrarily large programs executable.</p>
+<h2 id="docs-13-complete-practical-programs">13. Complete practical programs</h2>
+<p>Save each block in the named <code>.vexa</code> file and run it with
+<code>python3 interpreter.py filename.vexa</code>. Matching files are in <code>examples/</code>.
+Test-input comments show sample input lines; type them when prompted.</p>
+<h3 id="docs-terminal-calculator-calculator-vexa">Terminal calculator — calculator.vexa</h3>
+<p>This performs one calculation per run. Input is converted to floats; the selected
+operator determines the branch. Division is guarded. Invalid numeric text raises
+a conversion error; this is a terminal calculator, with no GUI.</p>
+<pre><code class="language-vexa"># test-input: [&quot;8&quot;, &quot;/&quot;, &quot;2&quot;]
+ask &quot;First number? &quot; into first_text.
+ask &quot;Operator (+, -, *, /)? &quot; into operator.
+ask &quot;Second number? &quot; into second_text.
+let a be to_float(first_text).
+let b be to_float(second_text).
+if operator is equal to &quot;+&quot; then { say a + b. }
+else if operator is equal to &quot;-&quot; then { say a - b. }
+else if operator is equal to &quot;*&quot; then { say a * b. }
+else if operator is equal to &quot;/&quot; then {
+    if b is equal to 0 then { say &quot;Cannot divide by zero&quot;. }
+    else { say a / b. }
+} else { say &quot;Unknown operator&quot;. }
+</code></pre>
+<p>Sample inputs <code>8</code>, <code>/</code>, <code>2</code> produce <code>4.0</code> after the prompts.</p>
+<h3 id="docs-even-odd-checker-even-odd-vexa">Even/odd checker — even_odd.vexa</h3>
+<p>An integer is even when its remainder after division by two is zero. This also
+works for negative integers.</p>
+<pre><code class="language-vexa"># test-input: [&quot;7&quot;]
+ask &quot;Integer? &quot; into text.
+let number be to_int(text).
+if number % 2 is equal to 0 then { say &quot;Even&quot;. }
+else { say &quot;Odd&quot;. }
+</code></pre>
+<p>Input <code>7</code> produces <code>Odd</code> after the prompt.</p>
+<h3 id="docs-multiplication-table-multiplication-table-vexa">Multiplication table — multiplication_table.vexa</h3>
+<p>A counter supplies the multiplier. Initialize it outside the loop, then update
+it each time so the loop ends after ten rows.</p>
+<pre><code class="language-vexa"># test-input: [&quot;3&quot;]
+ask &quot;Table for? &quot; into text.
+let number be to_int(text).
+let factor be 1.
+while factor is less than or equal to 10 {
+    say to_string(number) + &quot; x &quot; + to_string(factor) + &quot; = &quot; + to_string(number * factor).
+    set factor to factor + 1.
+}
+</code></pre>
+<p>For <code>3</code>, rows run from <code>3 x 1 = 3</code> through <code>3 x 10 = 30</code>.</p>
+<h3 id="docs-random-number-generator-random-number-vexa">Random number generator — random_number.vexa</h3>
+<p>Both bounds are inclusive. Checking their order lets the program explain the
+mistake before calling the built-in. Equal bounds always return that bound.</p>
+<pre><code class="language-vexa"># test-input: [&quot;1&quot;, &quot;6&quot;]
+ask &quot;Minimum? &quot; into low_text.
+ask &quot;Maximum? &quot; into high_text.
+let low be to_int(low_text).
+let high be to_int(high_text).
+if low is less than or equal to high then {
+    say random(low, high).
+} else { say &quot;Minimum must not exceed maximum&quot;. }
+</code></pre>
+<p>Inputs <code>1</code>, <code>6</code> print an integer from <code>1</code> through <code>6</code> after the prompts.</p>
+<h3 id="docs-list-summary-list-summary-vexa">List summary — list_summary.vexa</h3>
+<p>A function receives a list and computes a total with a local accumulator.
+The caller uses the returned value to calculate the average.</p>
+<pre><code class="language-vexa">define total with (values) {
+    let sum be 0.
+    for each value in values { set sum to sum + value. }
+    return sum.
+}
+let scores be [12, 18, 24].
+append(scores, 30).
+say &quot;Total: &quot; + to_string(total(scores)).
+if length(scores) is greater than 0 then {
+    say &quot;Average: &quot; + to_string(total(scores) / length(scores)).
+}
+</code></pre>
+<p>This prints <code>Total: 84</code> and <code>Average: 21.0</code>. The empty-list guard avoids division
+by zero. The function's <code>sum</code> does not leak into program scope.</p>
+<h2 id="docs-14-practice-exercises">14. Practice exercises</h2>
+<p>Each exercise is independent; start a fresh file. Solutions follow separately.</p>
+<ol>
+<li>Print <code>Welcome to Vexa</code>.</li>
+<li>Declare a score of 5, add 7 with <code>set</code>, and print it.</li>
+<li>Print the result of <code>(2 + 3) * 4</code>.</li>
+<li>Store a name and print a greeting using concatenation.</li>
+<li>Ask for an integer and print twice its value.</li>
+<li>Classify <code>-3</code> as positive, zero, or negative with <code>else if</code>.</li>
+<li>Print integers 1 through 5 with <code>while</code>.</li>
+<li>Print <code>Practice</code> three times using <code>repeat</code>.</li>
+<li>Sum <code>[2, 4, 6]</code> using <code>for each</code>.</li>
+<li>Define and call a function that squares its parameter.</li>
+<li>Define recursive factorial and print factorial of 4.</li>
+<li>Create <code>[10, 20]</code>, replace the first element with 99, append 30, and print it.</li>
+<li>Remove and print the last value from <code>[1, 2, 3]</code>; then print its length.</li>
+<li>Print odd numbers below 6 using <code>continue</code>.</li>
+<li>Stop a loop with <code>break</code> when a counter reaches 3; print only 1 and 2.</li>
+<li>Generate a number between 1 and 10 and print whether it is at least 5.</li>
+<li>Make a closure that adds a captured amount; add 5 to 8.</li>
+</ol>
+<h2 id="docs-15-exercise-solutions">15. Exercise solutions</h2>
+<h3 id="docs-1-first-output">1. First output</h3>
+<pre><code class="language-vexa">say &quot;Welcome to Vexa&quot;.
+</code></pre>
+<h3 id="docs-2-updating-a-variable">2. Updating a variable</h3>
+<pre><code class="language-vexa">let score be 5.
+set score to score + 7.
+say score.
+</code></pre>
+<h3 id="docs-3-grouping-arithmetic">3. Grouping arithmetic</h3>
+<pre><code class="language-vexa">say (2 + 3) * 4.
+</code></pre>
+<h3 id="docs-4-joining-text">4. Joining text</h3>
+<pre><code class="language-vexa">let name be &quot;Sam&quot;.
+say &quot;Hello, &quot; + name.
+</code></pre>
+<h3 id="docs-5-numeric-input">5. Numeric input</h3>
+<pre><code class="language-vexa"># test-input: [&quot;6&quot;]
+ask &quot;Integer? &quot; into text.
+say to_int(text) * 2.
+</code></pre>
+<h3 id="docs-6-multiple-branches">6. Multiple branches</h3>
+<pre><code class="language-vexa">let n be -3.
+if n is greater than 0 then { say &quot;Positive&quot;. }
+else if n is equal to 0 then { say &quot;Zero&quot;. }
+else { say &quot;Negative&quot;. }
+</code></pre>
+<h3 id="docs-7-counting">7. Counting</h3>
+<pre><code class="language-vexa">let n be 1.
+while n is less than or equal to 5 {
+    say n.
+    set n to n + 1.
+}
+</code></pre>
+<h3 id="docs-8-fixed-repetition">8. Fixed repetition</h3>
+<pre><code class="language-vexa">repeat 3 times { say &quot;Practice&quot;. }
+</code></pre>
+<h3 id="docs-9-accumulation">9. Accumulation</h3>
+<pre><code class="language-vexa">let total be 0.
+for each n in [2, 4, 6] { set total to total + n. }
+say total.
+</code></pre>
+<h3 id="docs-10-a-reusable-calculation">10. A reusable calculation</h3>
+<pre><code class="language-vexa">define square with (n) { return n ^ 2. }
+say square(7).
+</code></pre>
+<h3 id="docs-11-a-recursive-calculation">11. A recursive calculation</h3>
+<pre><code class="language-vexa">define factorial with (n) {
+    if n is less than or equal to 1 then { return 1. }
+    return n * factorial(n - 1).
+}
+say factorial(4).
+</code></pre>
+<h3 id="docs-12-list-changes">12. List changes</h3>
+<pre><code class="language-vexa">let values be [10, 20].
+set values[0] to 99.
+append(values, 30).
+say values.
+</code></pre>
+<h3 id="docs-13-removing-an-element">13. Removing an element</h3>
+<pre><code class="language-vexa">let values be [1, 2, 3].
+say pop(values).
+say length(values).
+</code></pre>
+<h3 id="docs-14-skipping-iterations">14. Skipping iterations</h3>
+<pre><code class="language-vexa">let n be 0.
+while n is less than 5 {
+    set n to n + 1.
+    if n % 2 is equal to 0 then { continue. }
+    say n.
+}
+</code></pre>
+<h3 id="docs-15-ending-a-loop">15. Ending a loop</h3>
+<pre><code class="language-vexa">let n be 0.
+while true {
+    set n to n + 1.
+    if n is equal to 3 then { break. }
+    say n.
+}
+</code></pre>
+<h3 id="docs-16-randomness-and-comparison">16. Randomness and comparison</h3>
+<pre><code class="language-vexa">let n be random(1, 10).
+say n.
+say n is greater than or equal to 5.
+</code></pre>
+<h3 id="docs-17-capturing-a-parameter">17. Capturing a parameter</h3>
+<pre><code class="language-vexa">define make_adder with (amount) {
+    define add with (value) { return value + amount. }
+    return add.
+}
+let add_five be make_adder(5).
+say add_five(8).
+</code></pre>
+<p>The numeric results for exercises 2, 3, 5, 9, 10, 11, and 17 are <code>12</code>, <code>20</code>,
+<code>12</code> (with the sample input), <code>12</code>, <code>49</code>, <code>24</code>, and <code>13</code>. Exercise 12 prints
+<code>[99, 20, 30]</code>; exercise 13 prints <code>3</code> then <code>2</code>. Functions keep parameters/local
+variables per call; loops update existing bindings rather than redeclaring them.</p>
+<h2 id="docs-16-quick-reference">16. Quick reference</h2>
+<p>All reserved words (case-sensitive):</p>
+<pre><code class="language-text">let be set to say print ask into return if then else repeat times while for each in
+ define with true false null is equal not greater less than or and break continue
+</code></pre>
+<p>In the following table, capitalized placeholders stand for your names or
+expressions; they are not literal keywords.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Declare / update</td>
+<td><code>let NAME be VALUE.</code> / <code>set NAME to VALUE.</code></td>
+</tr>
+<tr>
+<td>Output / input</td>
+<td><code>say VALUE.</code> / <code>print VALUE.</code> / <code>ask PROMPT into NAME.</code></td>
+</tr>
+<tr>
+<td>Conditional</td>
+<td><code>if BOOL then { ... } else if BOOL then { ... } else { ... }</code></td>
+</tr>
+<tr>
+<td>While / repeat</td>
+<td><code>while BOOL { ... }</code> / <code>repeat COUNT times { ... }</code></td>
+</tr>
+<tr>
+<td>Iterate a list</td>
+<td><code>for each NAME in LIST { ... }</code></td>
+</tr>
+<tr>
+<td>Control loop</td>
+<td><code>break.</code> / <code>continue.</code></td>
+</tr>
+<tr>
+<td>Define / call</td>
+<td><code>define NAME with (A, B) { return VALUE. }</code> / <code>NAME(X, Y)</code></td>
+</tr>
+<tr>
+<td>Empty function</td>
+<td><code>define NAME with () {}</code></td>
+</tr>
+<tr>
+<td>List / read / write</td>
+<td><code>[A, B]</code> / <code>LIST[INDEX]</code> / <code>set LIST[INDEX] to VALUE.</code></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td><code># text to end of line</code></td>
+</tr>
+<tr>
+<td>Group</td>
+<td><code>(EXPRESSION)</code></td>
+</tr>
+<tr>
+<td>Arithmetic</td>
+<td><code>+ - * / % ^</code>; unary <code>+ -</code></td>
+</tr>
+<tr>
+<td>Compare</td>
+<td><code>is equal to</code>, <code>is not equal to</code>, <code>is greater than</code>, <code>is less than</code>, with optional <code>or equal to</code> after <code>than</code></td>
+</tr>
+<tr>
+<td>Logic</td>
+<td><code>not</code>, <code>and</code>, <code>or</code> (boolean operands only)</td>
+</tr>
+<tr>
+<td>Values</td>
+<td>Integers, decimal floats, double-quoted strings, <code>true</code>, <code>false</code>, <code>null</code>, lists, functions</td>
+</tr>
+</tbody>
+</table></div>
+<p>Built-ins by purpose:</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Exact signatures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Random</td>
+<td><code>random(low, high)</code></td>
+</tr>
+<tr>
+<td>Convert</td>
+<td><code>to_int(text)</code>, <code>to_float(text)</code>, <code>to_string(value)</code></td>
+</tr>
+<tr>
+<td>Size</td>
+<td><code>length(string_or_list)</code></td>
+</tr>
+<tr>
+<td>Math</td>
+<td><code>abs(n)</code>, <code>sqrt(n)</code>, <code>floor(n)</code>, <code>ceil(n)</code>, <code>round(n)</code>, <code>min(a, b)</code>, <code>max(a, b)</code></td>
+</tr>
+<tr>
+<td>Mutate lists</td>
+<td><code>append(items, value)</code>, <code>pop(items)</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Remember: simple statements need periods, compound statements end at <code>}</code>, blocks
+share scope, functions create call scopes, and <code>3.14.</code> needs both its decimal
+point and its final statement period.</p>
+<h2 id="docs-17-desktop-gui-reference">17. Desktop GUI reference</h2>
+<p>Put <code>use gui.</code> before calling GUI functions. This statement is repeatable; it
+turns on GUI support for the current interpreter. It is not a general import
+system. Ordinary terminal programs need no changes. Run GUI files with the same
+<code>vexa filename.vexa</code> command, or <code>python3 interpreter.py filename.vexa</code>.</p>
+<p>Tkinter comes with many Python installations. Check it with <code>python3 -m tkinter</code>;
+this should open a small test window. Some Linux distributions require a separate
+Tkinter package (often named <code>python3-tk</code>). A graphical desktop display is needed;
+a headless terminal cannot display windows. Vexa loads Tkinter only when creating
+the first window. Missing Tkinter and display failures produce Vexa diagnostics.
+No third-party Python library is needed.</p>
+<h3 id="docs-creating-and-arranging-widgets">Creating and arranging widgets</h3>
+<p>A <em>widget</em> is a window or a control such as a label. Store the value returned by
+a creation function in a variable, then pass that variable to other GUI functions.
+These opaque values belong to the interpreter that created them; do not use
+strings or numbers in their place. A child control belongs to its parent window.
+Creation alone does not position a control: call <code>place</code> to make it visible.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Parameters and result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>make_window(title, width, height)</code></td>
+<td>String title and positive integer dimensions in pixels. Returns a window.</td>
+</tr>
+<tr>
+<td><code>make_button(window, text, callback)</code></td>
+<td>Parent window, string caption, and zero-parameter Vexa function. Returns a button.</td>
+</tr>
+<tr>
+<td><code>make_label(window, text)</code></td>
+<td>Parent window and string text. Returns a label.</td>
+</tr>
+<tr>
+<td><code>make_text_input(window)</code></td>
+<td>Parent window. Returns an initially empty, single-line editable text input.</td>
+</tr>
+<tr>
+<td><code>get_text(widget)</code></td>
+<td>Returns a string: input contents, label/button caption, or window title.</td>
+</tr>
+<tr>
+<td><code>set_text(widget, text)</code></td>
+<td>Replaces input contents, label/button caption, or window title with a string. Returns null.</td>
+</tr>
+<tr>
+<td><code>place(widget, x, y, width, height)</code></td>
+<td>Positions a child control relative to its window's top-left corner. Coordinates are integers; dimensions are positive integers, all in pixels. Returns null.</td>
+</tr>
+<tr>
+<td><code>show_window(window)</code></td>
+<td>Processes GUI events and waits until this window closes. Returns null afterward.</td>
+</tr>
+<tr>
+<td><code>close_window(window)</code></td>
+<td>Destroys the window and its child controls. Returns null.</td>
+</tr>
+<tr>
+<td><code>style(widget, background, foreground, font_size)</code></td>
+<td>Sets colors and font size; use null for each option you want to leave unchanged. Returns null.</td>
+</tr>
+</tbody>
+</table></div>
+<p>All calls require exactly the listed arguments. Booleans and floating-point
+values are not integer dimensions. Negative coordinates are allowed and can put
+controls outside the visible area. Layout uses fixed pixels: resizing the window
+does not automatically move or resize controls. Overlapping controls may cover
+each other. Leave enough space for larger text and platform font differences.</p>
+<p>This isolated label example demonstrates the creation/layout/event-loop sequence:</p>
+<pre><code class="language-vexa"># gui-example
+use gui.
+let window be make_window(&quot;Label practice&quot;, 300, 140).
+let label be make_label(window, &quot;Hello from Vexa&quot;).
+place(label, 20, 20, 250, 40).
+show_window(window).
+</code></pre>
+<p>Close the window with its normal title-bar close button. <code>show_window</code> keeps
+processing events until that window is destroyed; statements after it then run.
+Create and arrange your controls before calling it. Additional windows share the
+same Tk application while their root is open. Closing the first/root window also
+closes its additional windows. Closing a secondary window leaves the root open.
+Using a destroyed window or one of its child controls is a runtime error.</p>
+<h3 id="docs-button-callbacks-and-editable-text">Button callbacks and editable text</h3>
+<p>Pass the function's <strong>name</strong>, without parentheses. <code>clicked</code> passes the function;
+<code>clicked()</code> immediately calls it and passes its result instead. Define the
+function before creating the button. A callback takes zero parameters; its return
+value is ignored. Closures and <code>set</code> work as in ordinary function calls.</p>
+<p>This small example only demonstrates a button copying text into a label:</p>
+<pre><code class="language-vexa"># gui-example
+use gui.
+let window be make_window(&quot;Callback practice&quot;, 320, 180).
+let entry be make_text_input(window).
+let label be make_label(window, &quot;&quot;).
+set_text(entry, &quot;Type here&quot;).
+define copy_text with () {
+    set_text(label, get_text(entry)).
+}
+let button be make_button(window, &quot;Copy text&quot;, copy_text).
+place(entry, 20, 15, 280, 30).
+place(button, 20, 55, 100, 30).
+place(label, 20, 95, 280, 40).
+show_window(window).
+</code></pre>
+<p>Input is always text. Use <code>to_int</code> or <code>to_float</code> explicitly when you need numbers.
+Invalid conversions and other Vexa errors inside a callback print
+<code>GUI callback error:</code> with the error's source location to the terminal. The
+current callback stops, earlier changes remain, and the window stays responsive
+for later clicks. Errors outside callbacks stop the program normally. Vexa has
+no try/catch. Keep callbacks short: a long loop or terminal <code>ask</code> blocks the GUI
+until it finishes. To make a close button, define a zero-parameter function whose
+body calls <code>close_window(window)</code>, then pass that function to <code>make_button</code>.</p>
+<h3 id="docs-optional-styling">Optional styling</h3>
+<p>Colors are Tk color names such as <code>&quot;white&quot;</code>, <code>&quot;navy&quot;</code>, or hex strings such as
+<code>&quot;#225588&quot;</code>. Foreground means text color. Font size is a positive integer in
+points, using the default font family. Label, button, and input controls support
+all three styling options. Windows support background only; pass null for their
+foreground and font size. Native themes may affect appearance on different systems.
+Invalid colors, unsupported options, closed handles, and invalid argument types
+produce Vexa errors with source locations.</p>
+<pre><code class="language-vexa"># gui-example
+use gui.
+let window be make_window(&quot;Style practice&quot;, 300, 120).
+let label be make_label(window, &quot;Styled text&quot;).
+style(window, &quot;#eeeeee&quot;, null, null).
+style(label, &quot;navy&quot;, &quot;white&quot;, 18).
+place(label, 20, 20, 260, 50).
+show_window(window).
+</code></pre>
+<p>GUI functions appear in editor completion and hover even before <code>use gui.</code>;
+execution still requires that statement. Widgets are not lists and cannot be
+indexed. <code>say</code> or <code>to_string</code> displays a short handle description such as
+<code>&lt;gui label&gt;</code>, rather than its current text; use <code>get_text</code> to read text.</p>
+<h2 id="docs-18-working-with-csv-files-and-tables">18. Working with CSV Files and Tables</h2>
+<p>A <strong>table</strong> holds information in rows and columns. Each row describes one thing,
+such as a student. Each column holds one kind of information, such as a name or
+score. A <strong>CSV file</strong> stores a table as text: commas separate cells, the first
+line names the columns, and each following line is a row. Quotes protect text
+that contains commas. For example, save this as <code>students.csv</code>:</p>
+<pre><code class="language-csv">name,score
+Alex,90
+Sam,85
+Jo,
+</code></pre>
+<p>Jo's empty score is a <strong>missing value</strong>: we do not know the score. It is different
+from zero. Files use UTF-8, and paths are relative to your terminal's current
+folder, just like other command-line paths.</p>
+<h3 id="docs-turn-on-table-support">Turn on table support</h3>
+<p>Start each table program with <code>use pandas.</code>. This enables the installed pandas
+library for the current interpreter. You do not need to learn Python or pandas
+commands to use the English phrases below. Ordinary Vexa programs still work
+without this optional library. Repeating <code>use pandas.</code> is harmless; executing it
+loads pandas, while syntax checking never loads pandas.</p>
+<p>On this machine, <code>vexa</code> runs
+<code>/home/turboslop/finance project/Vexa/.venv/bin/python</code> (Python 3.14.4).
+That environment currently has <strong>none</strong> of pandas, NumPy, python-dateutil, or six
+installed. If you choose to install table support, run:</p>
+<pre><code class="language-bash">&quot;/home/turboslop/finance project/Vexa/.venv/bin/python&quot; -m pip install pandas
+</code></pre>
+<p>No packages were installed for this chunk. For another installation, use the
+Python executable that actually runs your Vexa command, followed by
+<code>-m pip install pandas</code>. An import failure gives that executable in its diagnostic.
+The separate <code>/usr/bin/python3</code> environment was verified with pandas <strong>3.1.0</strong>,
+NumPy <strong>2.5.4</strong>, python-dateutil <strong>2.9.0</strong>, and six <strong>1.17.0</strong>; required dependencies
+import successfully. Its old optional bottleneck <strong>1.4.2</strong> triggers a pandas
+warning (pandas requests at least 1.5.0); table tests still pass using pandas'
+normal implementation. This optional accelerator is not required.</p>
+<h3 id="docs-read-and-explore-a-file">Read and explore a file</h3>
+<p>Run this after creating <code>students.csv</code> above:</p>
+<pre><code class="language-vexa"># tables-example
+use pandas.
+let students be read csv from &quot;students.csv&quot;.
+say first 5 rows of students.
+say last 3 rows of students.
+say number of rows in students.
+say number of columns in students.
+say columns of students.
+let names be column &quot;name&quot; from students.
+say names.
+</code></pre>
+<p><code>first</code> and <code>last</code> show at most the requested number of rows. The count must be a
+nonnegative integer; zero returns an empty table. Here there are three rows and
+two columns. <code>columns of students</code> returns the ordinary Vexa list
+<code>[&quot;name&quot;, &quot;score&quot;]</code>. Selecting a column returns a pandas column value (a Series),
+which you can store, pass to functions, and display; it is not a Vexa list.</p>
+<p>Tables and columns display using pandas' text layout: column headings, row
+labels, and unquoted text/numbers. Missing cells can display as <code>NaN</code>, <code>&lt;NA&gt;</code>, or
+<code>None</code>, depending on the column's type. Large tables may be shortened for display;
+all rows are still stored. <code>to_string</code> uses the same layout. Pandas version and
+column types can affect spacing and numeric display (<code>90</code> versus <code>90.0</code>).</p>
+<h3 id="docs-calculate-filter-and-handle-missing-values">Calculate, filter, and handle missing values</h3>
+<p>An <strong>average</strong> adds known scores and divides by how many known scores there are.
+A <strong>total</strong> adds them. Minimum and maximum find the smallest and largest known
+values. <code>count</code> counts nonmissing cells, including text cells.</p>
+<pre><code class="language-vexa"># tables-example
+use pandas.
+let students be read csv from &quot;students.csv&quot;.
+let result be average of column &quot;score&quot; in students.
+say result.
+say total of column &quot;score&quot; in students.
+say minimum of column &quot;score&quot; in students.
+say maximum of column &quot;score&quot; in students.
+say count of column &quot;score&quot; in students.
+let passed be rows of students where column &quot;score&quot; is greater than 70.
+say first 5 rows of passed.
+let cleaned be drop missing rows from students.
+let filled be fill missing in column &quot;score&quot; of students with 0.
+say number of rows in cleaned.
+say filled.
+</code></pre>
+<p>The average is <code>87.5</code>, the total is <code>175.0</code>, and the count is <code>2</code>. Filtering
+means keeping only rows that pass a test. Both Alex and Sam pass; Jo's missing
+score does not match. Filters accept all six existing comparisons: <code>is equal to</code>,
+<code>is not equal to</code>, <code>is greater than</code>, <code>is less than</code>, and either ordering with
+<code>or equal to</code>. Missing cells never match, even for <code>is not equal to</code>.</p>
+<p><code>drop missing rows from</code> removes any row with at least one missing cell.
+<code>fill missing in column</code> replaces missing cells only in the named column.
+Filling with zero is a choice you make; it changes the meaning of the data and
+therefore later averages. Fill values must be nonmissing scalar values (a string,
+number, or boolean), and must be compatible with the pandas column type.</p>
+<p>Statistics skip missing values. For an empty/all-missing column, total is <code>0</code>,
+count is <code>0</code>, and average/minimum/maximum are <code>null</code>. Except for count, statistics
+require actual numeric values, excluding booleans. Text such as <code>&quot;90&quot;</code> in a
+constructed table is not silently converted. A mixed text/numeric column produces
+an error. Nonfinite statistical results produce an error. CSV reading uses pandas'
+normal type inference: a numeric-looking CSV column becomes numbers, while a
+column containing invalid numeric text remains text and numeric statistics fail.
+Pandas' default CSV missing markers include empty cells, <code>NA</code>, <code>NaN</code>, and <code>null</code>.
+An empty string in a directly constructed table is ordinary text, not missing;
+use <code>null</code> for a missing cell there.</p>
+<h3 id="docs-make-and-save-a-table">Make and save a table</h3>
+<p>This example runs without an input file. Choose a fresh output filename first:</p>
+<pre><code class="language-vexa"># tables-example
+use pandas.
+let students be table with columns [&quot;name&quot;, &quot;score&quot;] and rows [
+    [&quot;Alex&quot;, 90],
+    [&quot;Sam&quot;, 85]
+].
+say students.
+save students as csv to &quot;output.csv&quot;.
+</code></pre>
+<p>Column names must be unique strings. Each row must be a list with exactly one
+scalar cell per column; nested lists and functions cannot be cells. An empty
+row list is allowed. Column names are case-sensitive. Rows are selected by
+position/order, while columns are selected by name. Filtering preserves pandas'
+original row labels; these labels are not additional columns.</p>
+<p>Saving writes all rows with a header, commas, UTF-8 encoding, empty missing
+cells, and no pandas row index. It <strong>refuses to overwrite any existing file</strong>.
+Choose a new path or deliberately remove the old file yourself before running
+again. Parent folders must already exist. Paths are local filesystem paths;
+URLs, remote downloads, compression options, and read/write options are unsupported.
+Reading/saving errors include a Vexa line and column and the underlying file
+problem. A missing column gives, for example,
+<code>Column 'score' was not found in table 'students'.</code> Computed table expressions
+receive the same message without a variable name. Errors stop the program;
+Vexa has no try/catch. A failed write can leave a partial newly created file.</p>
+<h3 id="docs-full-phrase-reference-and-expression-boundaries">Full phrase reference and expression boundaries</h3>
+<p>Uppercase placeholders below represent values you supply. <code>T</code> is a table, <code>C</code>
+is a string column name, <code>N</code> is a nonnegative integer, and <code>V</code> is a scalar.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>English phrase</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>use pandas.</code></td>
+<td>Enable table support (statement).</td>
+</tr>
+<tr>
+<td><code>read csv from PATH</code></td>
+<td>New table read from a local CSV.</td>
+</tr>
+<tr>
+<td><code>table with columns COLUMNS and rows ROWS</code></td>
+<td>New table from Vexa lists.</td>
+</tr>
+<tr>
+<td><code>first N rows of T</code></td>
+<td>New table with the first N rows.</td>
+</tr>
+<tr>
+<td><code>last N rows of T</code></td>
+<td>New table with the last N rows.</td>
+</tr>
+<tr>
+<td><code>number of rows in T</code></td>
+<td>Integer row count.</td>
+</tr>
+<tr>
+<td><code>number of columns in T</code></td>
+<td>Integer column count.</td>
+</tr>
+<tr>
+<td><code>columns of T</code></td>
+<td>Vexa list of string column names.</td>
+</tr>
+<tr>
+<td><code>column C from T</code></td>
+<td>New pandas column copy.</td>
+</tr>
+<tr>
+<td><code>average of column C in T</code></td>
+<td>Numeric average, or null.</td>
+</tr>
+<tr>
+<td><code>total of column C in T</code></td>
+<td>Numeric sum, or zero.</td>
+</tr>
+<tr>
+<td><code>minimum of column C in T</code></td>
+<td>Smallest number, or null.</td>
+</tr>
+<tr>
+<td><code>maximum of column C in T</code></td>
+<td>Largest number, or null.</td>
+</tr>
+<tr>
+<td><code>count of column C in T</code></td>
+<td>Number of nonmissing cells.</td>
+</tr>
+<tr>
+<td><code>rows of T where column C COMPARISON V</code></td>
+<td>New table containing matching rows.</td>
+</tr>
+<tr>
+<td><code>drop missing rows from T</code></td>
+<td>New table excluding incomplete rows.</td>
+</tr>
+<tr>
+<td><code>fill missing in column C of T with V</code></td>
+<td>New table with replacements.</td>
+</tr>
+<tr>
+<td><code>save T as csv to PATH.</code></td>
+<td>Save a table (statement).</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every table expression works inside ordinary expressions: initializers, <code>set</code>,
+<code>say</code>, lists, function arguments/returns, and conditions. Phrase input slots
+accept a literal, name, list, call, indexed expression, nested table phrase, or
+parenthesized expression. <strong>Parenthesize arithmetic, comparisons, or logic inside
+an input slot</strong>: <code>first (n + 1) rows of students</code>,
+<code>fill missing in column &quot;score&quot; of students with (base + 1)</code>.
+The row count also accepts unary signs and powers. Operators after a complete
+phrase apply to its result: <code>number of rows in students + 1</code> adds one to the
+count. For filters, exactly one comparison belongs to the filter; compound
+filters are unsupported. Use another filter on the resulting table instead.
+For example, <code>if number of rows in students is greater than 0 then { ... }</code>
+compares the count using ordinary Vexa syntax.</p>
+<p>These are exact token sequences, not unrestricted natural language. No new
+words were reserved in the lexer: existing variables/functions named <code>total</code>,
+<code>average</code>, <code>column</code>, or <code>first</code> still work. A matching multiword phrase starts
+its table grammar; parentheses can disambiguate an ordinary name/call.</p>
+<p>All table transformations return independent tables/columns and leave their
+inputs unchanged. <code>let other be students.</code> shares the same Python object;
+assignment, lists, and function calls preserve its identity. Equality of table
+or column handles means identity, not cell-by-cell equality. This chunk exposes
+no direct table mutation command. Its internal bridge retains real Python
+objects, validates adapter inputs, and translates library exceptions to located
+Vexa errors. Table phrases expose no Python imports or attributes; section 20
+adds explicit PyTorch interoperability without evaluating Python source.</p>
+<p>Unsupported: general pandas calls, table indexing/assignment, joins, grouping,
+sorting, plotting, custom CSV options, compound filter conditions,
+general APIs outside these adapters. NumPy support is described in section 19;
+PyTorch and CUDA phrases are described in section 20. Tables/columns are not ordinary lists: list indexing,
+<code>length</code>, <code>append</code>, and <code>for each</code> retain their existing list/string restrictions.
+VS Code suggests the English phrases, provides snippets and hover help, and
+checks their grammar; it does not check file existence, column names, or types.</p>
+<h2 id="docs-19-arrays-and-numerical-computing">19. Arrays and Numerical Computing</h2>
+<p>A regular Vexa <strong>list</strong> is a general container: <code>[1, &quot;hello&quot;, true]</code> can hold
+several kinds of value. A NumPy <strong>array</strong> stores a rectangular grid with one
+underlying data type and performs calculations on many elements at once.
+Start with <code>use numpy.</code> to enable the actual optional NumPy library. Syntax
+checking does not import it. Repeated use statements reuse the loaded module.</p>
+<p>The <code>vexa</code> CLI currently uses exactly
+<code>/home/turboslop/finance project/Vexa/.venv/bin/python</code>. NumPy and pandas are
+both absent in that environment. To install them yourself in that environment:</p>
+<pre><code class="language-bash">&quot;/home/turboslop/finance project/Vexa/.venv/bin/python&quot; -m pip install numpy pandas
+</code></pre>
+<p>No packages were installed in Chunk 13. The separate <code>/usr/bin/python3</code> imports
+NumPy <strong>2.5.4</strong> and pandas <strong>3.1.0</strong> and passes the array/table integration tests.
+Pandas warns that optional bottleneck <strong>1.4.2</strong> is older than its required <strong>1.5.0</strong>;
+pandas falls back to its normal implementation. No NumPy/pandas incompatibility
+was observed. A library import failure reports the current Python executable
+and its installation command. Programs without these libraries still run.</p>
+<h3 id="docs-make-arrays-and-inspect-their-shapes">Make arrays and inspect their shapes</h3>
+<pre><code class="language-vexa"># arrays-example
+use numpy.
+let numbers be array with [10, 20, 30, 40].
+say numbers.
+say average of numbers.
+say total of numbers.
+say minimum of numbers.
+say maximum of numbers.
+let zeros be array of zeros with shape [3, 3].
+let ones be array of ones with shape [2, 4].
+let values be array from 1 to 10.
+let random_values be random array with shape [2, 3].
+say shape of numbers.
+say shape of zeros.
+say values.
+</code></pre>
+<p>The statistics above are <code>25.0</code>, <code>100</code>, <code>10</code>, and <code>40</code>. A <strong>shape</strong> is an ordinary
+Vexa list of lengths: <code>[4]</code> means one dimension with four elements; <code>[3, 3]</code>
+means three rows and three columns. Shapes contain nonnegative integers,
+excluding booleans. Zero lengths create empty dimensions. <code>[]</code> creates a
+zero-dimensional scalar array for the zeros/ones/random constructors.</p>
+<p><code>array from START to END</code> includes <strong>both endpoints</strong>, using integer steps of
+one. START and END must be integers with START no greater than END. Thus 1 to 10
+creates ten elements. <code>random array with shape S</code> produces independent uniform
+floating-point samples in <strong>[0, 1)</strong>: zero is possible and one is excluded.
+There is no Vexa seed command; automated tests seed NumPy from their Python
+harness. Zeros, ones, and random arrays have NumPy's default floating-point type.
+Integer-only lists normally produce integer arrays; numeric lists containing a
+float produce floating-point arrays. Ragged nested lists are rejected.
+Mixed kinds use object storage to retain values such as <code>1</code>, <code>&quot;bad&quot;</code>, and <code>null</code>
+without silently turning numbers into text. Numerical operations reject text,
+boolean, and object arrays. Array display uses NumPy formatting (often spaces
+rather than commas); long arrays may be abbreviated.</p>
+<h3 id="docs-calculate-with-whole-arrays">Calculate with whole arrays</h3>
+<pre><code class="language-vexa"># arrays-example
+use numpy.
+let a be array with [1, 2, 3].
+let doubled be multiply a by 2.
+let increased be add 5 to a.
+let combined be add arrays a and a.
+let decreased be subtract 1 from a.
+let halves be divide a by 2.
+say doubled.
+say increased.
+say combined.
+say decreased.
+say halves.
+say square root of a.
+say standard deviation of a.
+</code></pre>
+<p><strong>Elementwise</strong> means each position is calculated separately. Doubled contains
+<code>[2, 4, 6]</code>; combined contains <code>[2, 4, 6]</code> too. Canonical phrases are
+<code>add X to Y</code>, <code>add arrays A and B</code>, <code>subtract X from Y</code> (Y minus X),
+<code>multiply X by Y</code>, and <code>divide X by Y</code>. At least one operand must be an array;
+the other can be a number or numeric array. Ordinary <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, and
+existing scalar built-ins retain their previous Vexa rules; use the English
+phrases for arrays.</p>
+<p>Other elementwise phrases are <code>square root of A</code>, <code>absolute values of A</code>,
+<code>sine of A</code>, <code>cosine of A</code>, <code>exponential of A</code>, and <code>logarithm of A</code>.
+Angles use radians; logarithm means natural logarithm. Invalid domains,
+floating overflow, floating underflow, and division by zero report located
+errors. NumPy integer arithmetic uses fixed-width types and can wrap on overflow;
+use suitably scaled data. No automatic arbitrary-precision array arithmetic exists.</p>
+<p><strong>Broadcasting</strong> lets NumPy reuse values across positions. Compare shapes from
+the rightmost dimension: lengths must be equal or one must be 1. Missing leading
+dimensions act as length 1. For example, <code>[2, 3]</code> and <code>[3]</code> combine to <code>[2, 3]</code>,
+and <code>[2, 1]</code> and <code>[3]</code> combine to <code>[2, 3]</code>. Shapes <code>[2]</code> and <code>[3]</code> cannot combine
+and produce an error. A scalar can combine with every position. Broadcasting
+does not trim, repeat arbitrary lengths, or change the inputs.</p>
+<p><code>total of A</code>, <code>average of A</code>, <code>minimum of A</code>, <code>maximum of A</code>, and
+<code>standard deviation of A</code> reduce <strong>all elements</strong> to a scalar. Standard deviation
+measures spread and uses the population formula (divide squared deviations by N,
+NumPy <code>ddof=0</code>). Empty total is zero; empty mean/minimum/maximum/deviation fail.
+Numeric <code>NaN</code> values propagate through these statistics, rather than being
+silently skipped; a displayed <code>nan</code> means the result is missing. This differs
+from the table statistics in section 18, which explicitly skip missing cells.
+There are no per-axis statistics in this chunk.</p>
+<h3 id="docs-reshape-transpose-and-multiply-matrices">Reshape, transpose, and multiply matrices</h3>
+<pre><code class="language-vexa"># arrays-example
+use numpy.
+let matrix be array with [
+    [1, 2],
+    [3, 4]
+].
+say shape of matrix.
+let reshaped be reshape matrix to [4].
+let transposed be transpose matrix.
+let product be matrix multiply matrix by matrix.
+say reshaped.
+say transposed.
+say product.
+say matrix[1][0].
+let middle be slice of reshaped from 1 to 3.
+say middle.
+</code></pre>
+<p>Reshaping changes the grid while retaining element order: <code>[2, 2]</code> becomes <code>[4]</code>.
+The new shape must contain exactly the same number of elements. Negative inferred
+lengths such as <code>[-1]</code> are unsupported. Transposing reverses dimension order;
+for a two-dimensional matrix it swaps rows and columns. A one-dimensional array
+is unchanged in shape.</p>
+<p>Matrix multiplication combines each row of the left matrix with each column of
+the right matrix. The product above is <code>[[7, 10], [15, 22]]</code>. For shapes <code>[M, K]</code>
+and <code>[K, N]</code>, the result has shape <code>[M, N]</code>; the inner K lengths must agree.
+This differs from <code>multiply matrix by matrix</code>, which multiplies matching cells.
+The phrase uses NumPy <code>matmul</code>: two vectors produce a dot-product scalar;
+vector/matrix combinations use NumPy's dimension promotion, and higher dimensions
+broadcast their leading batch shapes. Scalars are rejected for matrix multiplication.</p>
+<h3 id="docs-read-positions-and-slices">Read positions and slices</h3>
+<p>All read indices are <strong>zero-based, nonnegative integers</strong>, excluding booleans.
+<code>numbers[0]</code> reads the first element. <code>matrix[1][0]</code> reads row 1, then element 0
+of that row: here <code>3</code>. Each bracket selects along the first remaining dimension.
+Out-of-range reads fail. NumPy numeric scalars become ordinary Vexa numbers so
+<code>matrix[1][0] + 1</code> works. A row read remains an array.</p>
+<p>The canonical slicing form is <code>slice of A from START to STOP</code>. It selects along
+the first dimension, includes START, and <strong>excludes STOP</strong>. Both bounds must be
+nonnegative integers. Bounds past the end are clipped; START greater than STOP
+returns an empty slice. The example's middle slice contains <code>[2, 3]</code>. To slice a
+row, use <code>slice of matrix[0] from 0 to 2</code>. Colon indices, comma indices, negative
+indices, steps, masks, and array indexed assignment are unsupported. Ordinary
+list indexing and list indexed assignment keep their existing behavior; slicing
+requires an array. Arrays and tables do not become iterable Vexa lists.</p>
+<h3 id="docs-move-between-tables-and-arrays">Move between tables and arrays</h3>
+<p>After creating <code>students.csv</code> from section 18, this program is runnable:</p>
+<pre><code class="language-vexa"># tables-example
+use pandas.
+use numpy.
+let students be read csv from &quot;students.csv&quot;.
+let scores be column &quot;score&quot; from students.
+let values be array from scores.
+say average of values.
+let matrix be array with [[90, 85], [70, 95]].
+let results be table from array matrix with columns [&quot;first&quot;, &quot;second&quot;].
+say results.
+</code></pre>
+<p><code>array from X</code> accepts a pandas column, a pandas table, a Vexa list, or an
+existing array. <code>array with X</code> uses the same conversion rules. Native numeric
+types are preserved where supported. pandas conversion calls <code>to_numpy(copy=False)</code>:
+it avoids a copy when possible, but mixed column types, nullable/extension types,
+or layout conversion can require allocation or a common dtype. Missing entries
+remain missing (<code>NaN</code>, <code>None</code>, or pandas missing objects); text remains text.
+Nullable numeric columns may yield object arrays, which numerical operations
+reject. Select suitable numeric columns and handle missing data explicitly with
+the section 18 table phrases before calculating. No rows are silently dropped
+or nonnumeric cells parsed as numbers. The sample CSV with Jo's missing score
+therefore produces <code>nan</code> for the array average.</p>
+<p><code>table from array A with columns NAMES</code> requires a two-dimensional array and one
+unique string name per column. It calls pandas with <code>copy=False</code>, preserving
+types and sharing storage when pandas permits it. Aliasing a binding and
+<code>array from</code> an existing array preserve exact object identity. List conversion
+allocates new array storage; arithmetic allocates results. Slices, row reads,
+and transpose share storage. Reshape shares storage where possible but may copy.
+Pandas may expose a read-only view. These phrases provide no direct array mutation
+command. Equality between array handles tests identity, matching table handles.</p>
+<p>All array phrases work in ordinary Vexa expression positions and use the same
+contextual grammar as table phrases; no new words are reserved. Input slots
+accept unary/postfix values, nested phrases, or parenthesized expressions.
+Parenthesize compound slot expressions, for example <code>multiply a by (n + 1)</code>.
+Operators following a completed phrase apply to the phrase result. Table phrases
+such as <code>average of column &quot;score&quot; in students</code> retain their section 18 meaning.
+For <code>reshape</code> and <code>transpose</code>, put an array name immediately after the starter;
+<code>transpose(matrix)</code> remains an ordinary function call, preserving existing names.
+Bind a complicated input first. Other name/call ambiguities can be resolved by
+parenthesizing the function name, for example <code>(transpose)(matrix)</code>.</p>
+<p>NumPy exceptions are translated by the existing PythonBridge into Vexa errors
+with source line and column. These array phrases expose no arbitrary Python calls or imports. Section 20
+adds an explicit PyTorch API bridge; neither interface evaluates Python source. VS Code offers completions, snippets, hover help, highlighting, and
+syntax diagnostics for these phrases; dependency, dtype, and shape errors are
+runtime checks. PyTorch, CUDA, and machine learning workflows follow in section 20.</p>
+<h2 id="docs-20-machine-learning-with-vexa">20. Machine Learning with Vexa</h2>
+<p>Start with <code>use pytorch.</code>. PyTorch is optional: ordinary Vexa programs still
+work without it. These phrases operate on real PyTorch objects and preserve
+automatic differentiation. Words are contextual lexer identifiers, so existing
+names remain usable. Exact phrases form AST nodes before anything executes;
+editor diagnostics only parse and never run your program.</p>
+<h3 id="docs-environment-and-installation">Environment and installation</h3>
+<p>The <code>vexa</code> launcher uses <code>/home/turboslop/finance project/Vexa/.venv/bin/python</code>.
+That environment currently lacks torch, torchvision, NumPy and pandas. No packages
+or drivers were installed for this chunk. Choose Linux, Pip, Python and your
+compute platform in the <a href="https://pytorch.org/get-started/locally/">official PyTorch installer</a>.
+Use its matching torch/torchvision command with the executable above replacing
+<code>pip3</code> with <code>&quot;/home/turboslop/finance project/Vexa/.venv/bin/python&quot; -m pip</code>.
+For CPU, the environment-specific commands are:</p>
+<pre><code class="language-bash">&quot;/home/turboslop/finance project/Vexa/.venv/bin/python&quot; -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+&quot;/home/turboslop/finance project/Vexa/.venv/bin/python&quot; -m pip install numpy pandas
+</code></pre>
+<p>For NVIDIA CUDA choose the official selector's supported CUDA build for your
+machine rather than using this computer's ROCm build. Installing a CUDA wheel
+does not establish that your hardware/driver supports it. Verify by running the
+CUDA example below with the same executable.</p>
+<p>Tests here use <code>/usr/bin/python3</code>: torch <strong>2.14.0+rocm10.1.0</strong>, torchvision
+<strong>0.29.0a0+rocm10.1.0</strong>, NumPy <strong>2.5.4</strong>, pandas <strong>3.1.0</strong> all import. Tensor,
+vision, conversion and training tests demonstrate CPU interoperability with
+these installed versions; this is not a promise about every API/version pair.
+Pandas still warns about optional bottleneck 1.4.2 (requires 1.5.0).
+<code>nvidia-smi</code> is absent. <code>torch.version.cuda</code> is <code>None</code>, CUDA availability is false,
+and device count is zero. Actual GPU execution could not be verified.</p>
+<h3 id="docs-tensors-shapes-and-calculations">Tensors, shapes and calculations</h3>
+<p>A <strong>tensor</strong> is a grid of numbers. A vector has shape <code>[4]</code>; two rows of three
+numbers have shape <code>[2, 3]</code>. Dimensions are the axes of that grid. Shape matters:
+a layer expecting three input features needs a final dimension of length three.</p>
+<pre><code class="language-vexa"># ml-example
+use pytorch.
+let numbers be tensor with [1, 2, 3, 4].
+let result be multiply numbers by 2.
+say result.
+say shape of numbers.
+let grid be reshape numbers to [2, 2].
+say matrix multiply grid by grid.
+say grid[0][1].
+</code></pre>
+<p><code>use</code> loads PyTorch; <code>tensor with</code> creates a tensor; <code>multiply</code> computes each
+value times two. <code>say result</code> displays PyTorch's <code>tensor([2, 4, 6, 8])</code>, preserving
+the object. <code>shape of</code> returns a Vexa list. <code>reshape X to SHAPE</code> changes layout
+without changing the number of elements. <code>matrix multiply A by B</code> combines rows
+and columns, unlike elementwise multiplication. Indexing keeps scalar tensors.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Exact expression</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tensor with VALUES</code> or <code>tensor from VALUES</code></td>
+<td>Construct from a numeric list, array, pandas column/table or tensor.</td>
+</tr>
+<tr>
+<td><code>tensor with VALUES with options (dtype as &quot;float32&quot;, device as &quot;cpu&quot;, requires_grad as true)</code></td>
+<td>Explicit dtype, location and gradient tracking. Options are optional.</td>
+</tr>
+<tr>
+<td><code>shape of X</code></td>
+<td>Dimension lengths as a list.</td>
+</tr>
+<tr>
+<td><code>add A to B</code> or <code>add arrays A and B</code></td>
+<td>Elementwise addition; either operand may be a tensor.</td>
+</tr>
+<tr>
+<td><code>subtract A from B</code></td>
+<td>B minus A.</td>
+</tr>
+<tr>
+<td><code>multiply A by B</code>, <code>divide A by B</code></td>
+<td>Elementwise arithmetic with broadcasting.</td>
+</tr>
+<tr>
+<td><code>matrix multiply A by B</code></td>
+<td>PyTorch matmul.</td>
+</tr>
+<tr>
+<td><code>reshape X to [2, 3]</code>, <code>transpose X</code></td>
+<td>Reshape, or reverse the axes.</td>
+</tr>
+<tr>
+<td><code>slice of X from 1 to 3</code></td>
+<td>First-axis slice, stop excluded.</td>
+</tr>
+<tr>
+<td><code>convert tensor X to &quot;float32&quot;</code></td>
+<td>Change dtype using Tensor.to; retains autograd.</td>
+</tr>
+<tr>
+<td><code>dtype of X</code>, <code>device of X</code></td>
+<td>Inspect dtype/device.</td>
+</tr>
+<tr>
+<td><code>scalar value of X</code></td>
+<td>Explicit <code>.item()</code> extraction; requires one element.</td>
+</tr>
+<tr>
+<td><code>tensor values of X</code></td>
+<td>Explicit detach, CPU transfer and list conversion.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The existing <code>total of</code>, <code>average of</code>, <code>minimum of</code>, <code>maximum of</code>,
+<code>standard deviation of</code>, <code>square root of</code>, <code>absolute values of</code>, <code>sine of</code>,
+<code>cosine of</code>, <code>exponential of</code> and <code>logarithm of</code> also dispatch to PyTorch when
+passed tensors. Population standard deviation uses correction zero. Results stay
+tensors, including scalars. Broadcasting follows PyTorch rules; invalid shapes
+fail with source locations and library details. Ordinary Vexa symbolic arithmetic
+still requires ordinary numbers; use English phrases for tensors.</p>
+<p>Lists infer PyTorch types: integers normally become int64 and floats float32.
+NumPy/pandas inputs preserve their numeric dtype and are copied into owned
+storage. Existing tensor conversion preserves identity when no change is needed;
+dtype/device conversion uses <code>.to()</code> and preserves gradient connections. Tensor
+views and reshape follow PyTorch's sharing/copy rules. Supported dtype strings:
+<code>float16</code>, <code>float32</code>, <code>float64</code>, <code>bfloat16</code>, <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>,
+<code>uint8</code>, <code>bool</code>. Gradients require floating/complex tensor types (these constructors
+expose floating types). Text, null, NaN and infinity in input data are rejected;
+no values are silently parsed or dropped. Subsequent operations retain PyTorch's
+numerical behavior, including possible NaN/infinity. Index/slice bounds must be
+nonnegative integers; tensors have read access through brackets, not Vexa indexed
+assignment. Tensor equality in Vexa tests object identity.</p>
+<h3 id="docs-layers-and-networks">Layers and networks</h3>
+<p>A <strong>layer</strong> transforms a tensor. A linear layer learns a weighted combination of
+features. An activation such as ReLU introduces a nonlinear transformation, so
+a network can learn more than a straight line. A <strong>sequential</strong> network feeds
+each layer's output into the next layer.</p>
+<pre><code class="language-vexa"># ml-example
+use pytorch.
+let conv be conv2d layer with (3, 32, 3, padding as 1).
+let dense be linear layer with (128, 10).
+let activation be relu layer with ().
+let model be sequential layer with (
+    linear layer with (10, 32),
+    relu layer with (),
+    linear layer with (32, 1)
+).
+let input be tensor with [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]].
+let prediction be predict with model using input.
+say shape of prediction.
+</code></pre>
+<p>The convolution constructor takes input channels, output channels, kernel size;
+the dense constructor takes input and output features. <code>padding as 1</code> passes a
+real PyTorch keyword. The final prediction above has shape <code>[1, 1]</code>: one example,
+one output. Models can be stored, passed to Vexa functions and returned unchanged.
+All constructors below create the corresponding <code>torch.nn</code> module:</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Exact constructor form</th>
+<th>PyTorch class; positional arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>conv1d layer with (2, 3, 3)</code></td>
+<td>Conv1d; input channels, output channels, kernel size</td>
+</tr>
+<tr>
+<td><code>conv2d layer with (3, 32, 3)</code></td>
+<td>Conv2d; same argument meanings</td>
+</tr>
+<tr>
+<td><code>conv3d layer with (2, 3, 3)</code></td>
+<td>Conv3d; same argument meanings</td>
+</tr>
+<tr>
+<td><code>linear layer with (128, 10)</code></td>
+<td>Linear; input features, output features</td>
+</tr>
+<tr>
+<td><code>relu layer with ()</code></td>
+<td>ReLU</td>
+</tr>
+<tr>
+<td><code>sigmoid layer with ()</code></td>
+<td>Sigmoid</td>
+</tr>
+<tr>
+<td><code>tanh layer with ()</code></td>
+<td>Tanh</td>
+</tr>
+<tr>
+<td><code>flatten layer with (1)</code></td>
+<td>Flatten; first dimension to flatten</td>
+</tr>
+<tr>
+<td><code>dropout layer with (0.2)</code></td>
+<td>Dropout; probability of zeroing a value during training</td>
+</tr>
+<tr>
+<td><code>batchnorm1d layer with (3)</code></td>
+<td>BatchNorm1d; feature/channel count</td>
+</tr>
+<tr>
+<td><code>batchnorm2d layer with (3)</code></td>
+<td>BatchNorm2d; channel count</td>
+</tr>
+<tr>
+<td><code>batchnorm3d layer with (3)</code></td>
+<td>BatchNorm3d; channel count</td>
+</tr>
+<tr>
+<td><code>maxpool1d layer with (2)</code></td>
+<td>MaxPool1d; kernel size</td>
+</tr>
+<tr>
+<td><code>maxpool2d layer with (2)</code></td>
+<td>MaxPool2d; kernel size</td>
+</tr>
+<tr>
+<td><code>maxpool3d layer with (2)</code></td>
+<td>MaxPool3d; kernel size</td>
+</tr>
+<tr>
+<td><code>embedding layer with (10, 4)</code></td>
+<td>Embedding; vocabulary size, embedding width; inputs are integer indices</td>
+</tr>
+<tr>
+<td><code>sequential layer with (dense, activation)</code></td>
+<td>Sequential; modules in execution order</td>
+</tr>
+</tbody>
+</table></div>
+<p>Keyword arguments follow positional arguments and use <code>name as VALUE</code>, e.g.
+<code>linear layer with (4, 2, bias as false)</code>. Duplicate keywords fail syntax checks.
+List dimensions work where PyTorch accepts sequences. There is no Python tuple
+literal. Positional and keyword meanings otherwise follow the installed class;
+not every possible option has been tested. Each listed constructor has a real
+forward-pass test.</p>
+<h3 id="docs-predictions-loss-backpropagation-and-optimizers">Predictions, loss, backpropagation and optimizers</h3>
+<p>A <strong>prediction</strong> is the model output. A <strong>loss</strong> measures how far predictions are
+from targets. An <strong>optimizer</strong> adjusts trainable parameters. <strong>Backpropagation</strong>
+computes how each parameter affects the loss; PyTorch's autograd does this work.
+Vexa never substitutes a separate gradient engine.</p>
+<p>This tiny runnable training exercise learns a numeric relationship, without a
+complete dataset project:</p>
+<pre><code class="language-vexa"># ml-example
+use pytorch.
+let inputs be tensor with [[1.0], [2.0], [3.0]].
+let targets be multiply inputs by 2.
+let model be linear layer with (1, 1).
+let criterion be mean squared error loss.
+let optimizer be adam optimizer for model with learning rate 0.01.
+let predictions be null.
+let loss be null.
+training mode for model.
+repeat 10 times {
+    clear gradients of optimizer.
+    set predictions to predict with model using inputs.
+    set loss to calculate loss using criterion with (predictions, targets).
+    calculate gradients from loss.
+    update weights using optimizer.
+}
+say scalar value of loss.
+evaluation mode for model.
+say infer with model using inputs.
+</code></pre>
+<p>Inputs are three examples with one feature each. Targets are twice each input.
+The model starts with random weights. The criterion creates real MSELoss, which
+requires identical prediction and target shapes here, avoiding accidental
+broadcasting. The optimizer takes the model's parameters. <code>let</code> declares each
+binding once; <code>set</code> updates it inside the loop, preserving Vexa's scope rules.
+Each iteration clears old gradients, runs a forward pass, measures loss, computes
+gradients with <code>.backward()</code>, then changes parameters with <code>.step()</code>. Ten iterations
+demonstrate the mechanism; they do not guarantee an accurate model.</p>
+<p><code>sgd optimizer for model with learning rate 0.01</code> constructs SGD instead.
+Both optimizer forms accept extra keywords, for example
+<code>sgd optimizer for model with learning rate 0.01 with options (momentum as 0.9)</code>.
+<code>parameters of model</code> returns a list of genuine parameter objects.
+<code>training mode for model.</code> calls <code>.train()</code> and <code>evaluation mode for model.</code>
+calls <code>.eval()</code>, controlling dropout/batch normalization behavior.</p>
+<p><code>predict with model using inputs</code> <strong>preserves gradients</strong> in either mode.
+<code>infer with model using inputs</code> uses <code>torch.no_grad()</code> for that call only;
+it does not change model mode. Set evaluation mode explicitly for inference.
+Do not use <code>infer</code> for the training forward pass. Extracting scalar/list values
+also breaks gradient tracking for those extracted values.</p>
+<p>For classification, <code>cross entropy loss</code> creates CrossEntropyLoss. Use
+<code>calculate loss using criterion with (predictions, targets)</code> with raw class
+scores (logits). Integer class targets use int64, usually shape <code>[batch]</code>, while
+scores have shape <code>[batch, classes]</code>. PyTorch also accepts floating probability
+targets of the same shape as scores. Shape/type failures show source locations
+and useful underlying details. Dtype mismatch in a linear layer can also cause
+failure: convert inputs to <code>&quot;float32&quot;</code> when the model uses its default dtype.</p>
+<h3 id="docs-cuda-and-batches">CUDA and batches</h3>
+<p>CUDA lets a compatible NVIDIA GPU perform tensor calculations. Availability
+depends on hardware, driver and the installed PyTorch build. CPU remains usable.</p>
+<pre><code class="language-vexa"># ml-example
+use pytorch.
+say cuda available.
+say cuda device count.
+let device be best available device.
+say device.
+let numbers be tensor with [1, 2, 3].
+set numbers to move numbers to device.
+say device of numbers.
+</code></pre>
+<p><code>best available device</code> returns an actual device: <code>cuda</code> when available, <code>cpu</code>
+otherwise. <code>say device</code> makes the choice visible. Explicit <code>&quot;cuda&quot;</code> or
+<code>&quot;cuda:0&quot;</code> requests fail if CUDA is unavailable. <code>cuda device name</code> reports the
+current GPU name and also fails when unavailable. <code>move model to device</code> moves
+a model; <code>move inputs to device</code> moves a tensor. Assign the returned object with
+<code>set</code>. Move the model <strong>before creating its optimizer</strong>. Model/input device
+mismatches produce a clear error. Tensor construction also accepts
+<code>with options (device as device, dtype as &quot;float32&quot;)</code>.</p>
+<h3 id="docs-csv-datasets">CSV datasets</h3>
+<p>Select only numeric features. Here a tiny local fixture supplies the CSV:</p>
+<pre><code class="language-csv">size,bedrooms,price
+100,2,200
+150,3,300
+</code></pre>
+<p>Save it as <code>housing.csv</code> before running:</p>
+<pre><code class="language-vexa"># ml-fixture
+use pandas.
+use numpy.
+use pytorch.
+let data be read csv from &quot;housing.csv&quot;.
+let features be columns [&quot;size&quot;, &quot;bedrooms&quot;] from data.
+let labels be column &quot;price&quot; from data.
+let inputs be tensor from features with options (dtype as &quot;float32&quot;).
+let targets be tensor from labels with options (dtype as &quot;float32&quot;).
+set targets to reshape targets to [2, 1].
+say shape of inputs.
+</code></pre>
+<p>Each row becomes an example. Features have shape <code>[2, 2]</code>; targets are reshaped
+from <code>[2]</code> to <code>[2, 1]</code> for a one-output linear model. <code>columns NAMES from TABLE</code>
+selects several columns in order. Text and missing values fail conversion.
+Use existing <code>drop missing rows from data</code> or
+<code>fill missing in column &quot;price&quot; of data with 0</code> deliberately before conversion.
+Think about what missing data means; zero is not always a sensible replacement.
+No invalid values are silently converted. CSV reading remains local-file-only.</p>
+<h3 id="docs-images-transforms-and-dataloaders">Images, transforms and DataLoaders</h3>
+<p>Arrange ImageFolder data in class subfolders, for example <code>dataset/cats/a.png</code>
+and <code>dataset/dogs/b.png</code>. Class labels come from sorted subfolder names.
+<code>load images from &quot;dataset/&quot;</code> constructs a genuine torchvision ImageFolder,
+with ToTensor by default. It loads images as needed, not all into GPU memory.</p>
+<p>A <strong>transform</strong> changes each image as it is read. Resize makes batch dimensions
+consistent; ToTensor converts pixels to channels-first numeric tensors, normally
+scaling 8-bit images to <code>[0, 1]</code>. Normalize applies <code>(value - mean) / std</code> per
+channel. Choose values suitable for your data.</p>
+<pre><code class="language-vexa"># ml-fixture
+use pytorch.
+let transforms be compose transforms with (
+    resize images to [32, 32],
+    images to tensors,
+    normalize images with ([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+).
+let images be load images from &quot;dataset/&quot; with transforms transforms.
+let batches be make batches from images with size 32 with options (shuffle as true, num_workers as 0).
+let device be best available device.
+let inputs be null.
+let labels be null.
+for each batch in batches {
+    set inputs to move batch[0] to device.
+    set labels to move batch[1] to device.
+    say shape of inputs.
+}
+</code></pre>
+<p>A <strong>DataLoader</strong> groups examples into batches. <code>batch[0]</code> is the input tensor;
+<code>batch[1]</code> is the label tensor. <code>for each</code> accepts real DataLoaders as well as its
+existing list snapshots. Loading is lazy; each batch transfers separately.
+Use <code>num_workers as 0</code> first for portability. Other DataLoader options, such as
+<code>drop_last</code> and <code>pin_memory</code>, are forwarded to PyTorch. Custom collate functions
+can be passed through advanced interoperability. General Python iterators and
+datasets are not directly iterable with Vexa <code>for each</code>.</p>
+<p>Built-in datasets use <code>load mnist from &quot;data&quot; with options (train as true, download as false)</code>
+and <code>load cifar10 from &quot;data&quot; with options (train as true, download as false)</code>.
+Default train is true, default download is <strong>false</strong>, default transform is
+ToTensor. Supply <code>transform as transforms</code> in options to override it. Setting
+<code>download as true</code> explicitly authorizes the dataset library's network download;
+normal tests never download datasets. Missing local datasets fail clearly.
+Local image loading/transforms/batches are tested. Tiny local MNIST and CIFAR
+format fixtures verify real dataset parsing and batches; CIFAR fixture checksums
+replace the official dataset metadata in the test only. Actual downloads have
+not been exercised.</p>
+<h3 id="docs-save-weights-and-tensor-data">Save weights and tensor data</h3>
+<p><code>save model weights of model to &quot;model.pth&quot;.</code> saves a state dictionary, not a
+complete executable model. <code>load model weights into model from &quot;model.pth&quot;.</code>
+loads into an <strong>existing compatible architecture</strong>. Different layer sizes fail.
+Loading uses <code>weights_only=True</code> and CPU mapping, then copies weights into the
+model's current devices. Only use files you trust; restricted loading still has
+resource limits. Optimizer state and an entire training session are not saved.</p>
+<p><code>save tensor numbers to &quot;tensor.pth&quot;.</code> saves a tensor; <code>load tensor from &quot;tensor.pth&quot;</code>
+loads tensor data on CPU with restricted deserialization and verifies its type.
+Move it afterward if needed. These helpers never use unrestricted pickle loading.</p>
+<h3 id="docs-advanced-interoperability-and-limits">Advanced interoperability and limits</h3>
+<p>English phrases cover common tasks; they do not promise full PyTorch support.
+The shared PythonBridge now exposes explicit module/member/call expressions:</p>
+<pre><code class="language-vexa"># ml-example
+use pytorch.
+let nn be python module &quot;torch.nn&quot;.
+let constructor be python member &quot;Linear&quot; of nn.
+let model be python call constructor with (2, 1, bias as false).
+let inputs be tensor with [[1.0, 2.0]].
+say predict with model using inputs.
+</code></pre>
+<p>Allowlisted modules: <code>torch</code>, <code>torch.nn</code>, <code>torch.nn.functional</code>, <code>torch.optim</code>,
+<code>torch.utils.data</code>, <code>torchvision.datasets</code>, <code>torchvision.transforms</code>,
+<code>torchvision.models</code>. <code>python member &quot;NAME&quot; of MODULE</code> resolves only explicitly
+supported APIs: the layer constructors listed above, <code>nn.Module</code>, <code>nn.Parameter</code>,
+MSELoss/CrossEntropyLoss, Adam/SGD, TensorDataset/DataLoader, the documented
+transforms and datasets, common tensor constructors, and selected functional
+operations. Importing a module does not expose its other members; in particular
+<code>torch.load</code>, arbitrary bound methods, private names and dotted paths are rejected.
+<code>python call API with (...)</code> accepts these issued references or a real nn.Module.
+Keywords use <code>name as value</code>. Use the English save/load phrases for serialization.
+No Python source strings, eval or exec interpret Vexa programs.</p>
+<h3 id="docs-custom-nn-module-classes">Custom nn.Module classes</h3>
+<p><code>nn.Module</code> is an explicit allowlisted reference in a class's parent position,
+activated by <code>use pytorch.</code>. It does not import arbitrary Python classes or
+create an unrestricted <code>nn</code> namespace. Other Python bases are rejected.</p>
+<pre><code class="language-vexa"># ml-example
+use pytorch.
+class NeuralNetwork(nn.Module) {
+    define __init__ with () -&gt; null {
+        super().__init__().
+        set self.linear to linear layer with (2, 1).
+    }
+
+    define forward with (x) -&gt; tensor {
+        return self.linear(x).
+    }
+}
+let model be NeuralNetwork().
+let inputs be tensor with [[1.0, 2.0]].
+let output be predict with model using inputs.
+say output.
+</code></pre>
+<p>Construction returns a real Python <code>torch.nn.Module</code>. Call <code>super().__init__()</code>
+exactly once before assigning attributes in a custom constructor. A class without
+a constructor inherits its Vexa parent's constructor, or initializes nn.Module
+automatically when there is no Vexa constructor. Further Vexa subclasses and
+nested custom models are supported. <code>super()</code> follows Vexa method inheritance;
+the only exposed Python parent method is <code>nn.Module.__init__</code>.</p>
+<p><code>set self.layer to ...</code> uses PyTorch attribute assignment, preserving submodule
+and Parameter registration, autograd, device moves and recursive train/eval modes.
+Plain tensors remain ordinary attributes, as in PyTorch; use <code>nn.Parameter</code> via
+the explicit member/call bridge for trainable standalone tensors. Public attributes
+you assign, Vexa methods, and read-only <code>training</code> are accessible; private/internal
+attributes, arbitrary Python methods and overwriting PyTorch methods are rejected.
+Call <code>self.layer(x)</code> or use <code>predict with self.layer using x</code>. <code>-&gt; tensor</code> validates
+real tensor results without detaching the graph. Shape/device and callback errors
+become located Vexa runtime diagnostics, including calls initiated from Python.</p>
+<p>The existing optimizer, parameters, inference, move, training/evaluation and
+save/load weights phrases work on custom models. Save state dictionaries with
+<code>save model weights of model to &quot;weights.pth&quot;.</code> and load into a newly constructed
+matching architecture with <code>load model weights into model from &quot;weights.pth&quot;.</code>.
+Whole-model pickle, TorchScript/compile, concurrent Python callback execution and
+arbitrary Python method overrides are outside this bridge's supported API.
+The <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html">PyTorch Module contract</a>
+describes parent initialization, attribute registration and state dictionaries.</p>
+<p>There are no decorators,
+context managers, Python callbacks from Vexa functions, tuple/dictionary literals,
+keyword splats, device-wide automatic transfers, mixed precision training helpers,
+or distributed training syntax. Python callables can pass through the bridge;
+Vexa functions cannot act as Python callbacks. No pretrained weights or datasets
+are fetched automatically by the English defaults. Advanced model factories may
+download if explicitly called with download-triggering options. Desktop editor
+behavior and actual CUDA execution remain unverified in this environment.</p>
+<h2 id="docs-21-classes-and-objects">21. Classes and objects</h2>
+<p>Declare a class with methods using the existing <code>define</code> syntax, then call the
+class to create an instance:</p>
+<pre><code class="language-vexa">class Person {
+    define __init__ with (name) -&gt; null {
+        set self.name to name.
+    }
+    define greet with () {
+        say &quot;Hello&quot;.
+    }
+    define rename with (name) {
+        set self.name to name.
+    }
+}
+let p be Person(&quot;Alex&quot;).
+let q be Person(&quot;Sam&quot;).
+p.greet().
+p.rename(&quot;Ada&quot;).
+q.rename(&quot;Grace&quot;).
+say p.name. # Ada
+say q.name. # Grace
+</code></pre>
+<p>Save this example as <code>people.vexa</code> and launch it with
+<code>python3 interpreter.py people.vexa</code> (or <code>vexa people.vexa</code> with the local launcher).</p>
+<p>Each instance owns independent properties. <code>set object.property to value.</code> creates
+or replaces a property; reading an unset property raises an error. Property names
+must immediately follow the dot (<code>p.name</code>). Reads, calls, and indexing can chain,
+as in <code>p.friend.greet()</code> or <code>p.items[0]</code>. A property shadows a method of the same name.</p>
+<p>Methods automatically receive <code>self</code> in their local call scope: omit it from the
+parameter list. Declaring a parameter named <code>self</code> in a method is an error.
+Methods otherwise follow ordinary function rules, including return annotations,
+argument counts, lexical scope, and closures. A saved method (<code>let greet be p.greet.</code>)
+keeps its instance when later called as <code>greet()</code>. <code>self</code> is an ordinary local binding
+and is undefined outside methods unless explicitly bound in the enclosing scope.</p>
+<p>Class declarations bind names when executed, follow existing duplicate binding
+and shadowing rules, and accept only method definitions. Duplicate method names
+are errors, including in unused classes. Empty classes are allowed.</p>
+<h3 id="docs-single-inheritance">Single inheritance</h3>
+<p>Use Python-style parentheses to name one parent:</p>
+<pre><code class="language-vexa">class Animal {
+    define __init__ with (name) { set self.name to name. }
+    define speak with () -&gt; string { return &quot;Unknown&quot;. }
+    define describe with () { return self.name + &quot;: &quot; + self.speak(). }
+}
+class Dog(Animal) {
+    define speak with () -&gt; string { return &quot;Woof&quot;. }
+}
+let dog be Dog(&quot;Rex&quot;).
+say dog.speak(). # Woof
+say dog.describe(). # Rex: Woof
+</code></pre>
+<p>The parent name resolves in the current lexical scope when the declaration runs;
+it must already refer to a Vexa class, or be the explicit <code>nn.Module</code> base from
+section 20. Forward references, invalid parent types,
+and inheritance cycles are rejected. Only one parent is allowed.
+Methods are searched from child to parent, so child definitions override inherited
+methods. Inherited methods (including saved bound methods) receive the actual
+child instance as <code>self</code>, and calls through <code>self</code> use child overrides.
+A child without <code>__init__</code> inherits its nearest ancestor's constructor, including
+its arguments and property initialization. Each instance has independent properties.
+A child defining <code>__init__</code> replaces the inherited constructor; parent constructors
+do not run automatically in that case. Call <code>super().__init__(arguments)</code> to
+initialize the same instance through a parent constructor:</p>
+<pre><code class="language-vexa">class Person {
+    define __init__ with (name) { set self.name to name. }
+}
+class Student(Person) {
+    define __init__ with (name, grade) {
+        super().__init__(name).
+        set self.grade to grade.
+    }
+}
+let s be Student(&quot;Alex&quot;, 9).
+say s.name.
+say s.grade.
+</code></pre>
+<p>Inside an instance method, <code>super().method(arguments)</code> searches for a method
+starting at the parent of the class that defined the current method. This stays
+correct across multiple inheritance levels and inherited or saved bound methods.
+The parent method receives the same instance as <code>self</code>; calls through <code>self</code>
+still use child overrides. Parent method lookup ignores instance properties.
+<code>super()</code> takes no arguments and is reserved syntax. It is invalid at top level,
+in ordinary functions, and in nested helper functions, even when called by a
+method. Missing parent methods (including <code>__init__</code>) raise runtime errors;
+a root class has no parent methods. Parent calls use normal argument counts,
+return annotations, and constructor return checks.</p>
+<p>The constructor method <code>__init__</code> runs automatically on the newly created instance.
+Class call arguments are passed to it, and <code>self</code> is bound automatically. Its
+parameter count must match the arguments exactly. Constructors can initialize
+properties with <code>set self.name to name.</code> and must return <code>null</code>, either explicitly
+(<code>return null.</code>) or implicitly by reaching the end. Returning any non-null value
+raises a runtime error, including when calling <code>instance.__init__()</code> directly.
+The <code>-&gt; null</code> annotation is optional. Any other constructor annotation is a
+parse error, even if the class is never instantiated.
+Classes with no <code>__init__</code> anywhere in their ancestry accept zero arguments only.</p>
+<h3 id="docs-return-types-on-methods">Return types on methods</h3>
+<p>Save this as <code>calculator.vexa</code> and run <code>python3 interpreter.py calculator.vexa</code>:</p>
+<pre><code class="language-vexa">class Calculator {
+    define add with (a, b) -&gt; int { return a + b. }
+    define positive with (n) -&gt; bool { return n is greater than 0. }
+    define reset with () -&gt; null {}
+    define echo with (value) { return value. }
+}
+class ExtendedCalculator(Calculator) {
+    define add with (a, b) -&gt; int { return super().add(a, b). }
+}
+let calc be ExtendedCalculator().
+say calc.add(4, 5).
+say calc.positive(10).
+</code></pre>
+<p>This prints <code>9</code> and <code>true</code>. Inherited methods, overrides, saved bound methods,
+and <code>super()</code> calls check the annotation of the method actually executed.
+Overrides may choose their own annotation or omit it. Unannotated methods
+accept any return value. Checks use exact runtime types: <code>true</code> cannot satisfy
+<code>int</code>, and <code>1</code> cannot satisfy <code>float</code>. Falling off the body produces <code>null</code> and
+must satisfy the annotation too. For example, returning <code>&quot;nine&quot;</code> from <code>add</code>
+raises a return type mismatch naming <code>Calculator.add</code> at the <code>return</code> statement;
+a missing return points to the method declaration.</p>
+<h2 id="docs-22-modules-and-imports">22. Modules and Imports</h2>
+<p>A Vexa module is a UTF-8 <code>.vexa</code> source file. Use <code>from … import …</code> to
+bind selected names in the current scope, or <code>import …</code> to bind the module
+namespace. Both forms end with a period. Module paths use dots for folders and
+omit the <code>.vexa</code> suffix.</p>
+<h3 id="docs-import-a-function-from-a-sibling-file">Import a function from a sibling file</h3>
+<p>Save the following as <code>hello.vexa</code>:</p>
+<pre><code class="language-vexa">let greeting be &quot;Hello&quot;.
+let punctuation be &quot;!&quot;.
+
+define printHello with () {
+    say greeting + punctuation.
+}
+
+class Greeter {
+    define __init__ with (name) {
+        set self.name to name.
+    }
+
+    define greet with () {
+        say greeting + &quot;, &quot; + self.name + punctuation.
+    }
+}
+</code></pre>
+<p>Save this as <code>main.vexa</code> in the same folder:</p>
+<pre><code class="language-vexa">from hello import printHello.
+printHello().
+</code></pre>
+<p>Run <code>vexa main.vexa</code> from that folder, or run <code>python3 /path/to/interpreter.py main.vexa</code> using your interpreter's actual path. The program prints <code>Hello!</code>.</p>
+<h3 id="docs-import-a-module-namespace">Import a module namespace</h3>
+<p>Keep the same <code>hello.vexa</code> and replace <code>main.vexa</code> with:</p>
+<pre><code class="language-vexa">import hello.
+hello.printHello().
+say hello.greeting.
+let greeter be hello.Greeter(&quot;Ada&quot;).
+greeter.greet().
+</code></pre>
+<p>This prints <code>Hello!</code>, <code>Hello</code>, and <code>Hello, Ada!</code> on separate lines.
+<code>hello</code> is the local name for the module namespace. Use <code>hello.member</code> to
+read a variable, call a function, or get a class. Create an object by calling
+the class with its constructor arguments, as in <code>hello.Greeter(&quot;Ada&quot;)</code>.</p>
+<h3 id="docs-multiple-imports-aliases-and-subdirectories">Multiple imports, aliases, and subdirectories</h3>
+<p>Keep <code>hello.vexa</code> beside <code>main.vexa</code> and copy the same <code>hello.vexa</code> into a
+<code>tools</code> subfolder. The layout is:</p>
+<pre><code class="language-text">main.vexa
+hello.vexa
+tools/
+    hello.vexa
+</code></pre>
+<p>Replace <code>main.vexa</code> with:</p>
+<pre><code class="language-vexa">import hello, tools.hello as helpers.
+from hello import printHello as greet, Greeter, greeting.
+from tools.hello import punctuation as ending.
+
+greet().
+helpers.printHello().
+let greeter be Greeter(&quot;Lin&quot;).
+greeter.greet().
+say greeting + ending.
+</code></pre>
+<p>This prints <code>Hello!</code> twice, then <code>Hello, Lin!</code> and <code>Hello!</code>. Commas
+separate modules in an <code>import</code> statement and names from the same module in a
+<code>from</code> statement. Use another <code>from</code> statement to select names from a
+different module. Put <code>as alias</code> after the module or name you want to rename.
+A dotted module path such as <code>tools.hello</code> defaults to the final name,
+<code>hello</code>, so the alias <code>helpers</code> avoids a duplicate binding in this example.</p>
+<h3 id="docs-resolution-caching-and-shared-values">Resolution, caching, and shared values</h3>
+<ul>
+<li>Paths are relative to the file containing the import. For example, an
+<code>import sibling.</code> inside <code>tools/hello.vexa</code> searches for
+<code>tools/sibling.vexa</code>, even if it appears inside a function called from
+<code>main.vexa</code>. The terminal's working directory only affects how a relative
+entry filename is found.</li>
+<li>The interpreter parses and executes a module when the first import reaches
+it. Top-level statements run in an isolated module scope with access to Vexa
+built-ins. The interpreter caches a successfully executed module by its
+resolved file path for the current run. Multiple aliases of the same file
+share one namespace. Different files with the same name load separately.</li>
+<li>A module exposes the bindings created in its module scope, including imported
+names. Its functions and class methods keep access to that scope after import.
+Namespace reads see the current module binding. A named import binds the
+current value locally. If a module later reassigns its variable, the existing
+named import keeps its original value. Mutable values such as lists are shared,
+so changes to their contents can be visible through either binding.</li>
+<li>Namespace bindings are read-only from outside the module. Use a function
+defined in the module to update its variables. Use a named class import if
+you want to use an imported class as a Vexa parent class, for example import
+<code>Greeter</code> and then declare <code>class Friendly(Greeter) {}</code>.</li>
+</ul>
+<h3 id="docs-circular-imports-and-common-errors">Circular imports and common errors</h3>
+<p>A circular import occurs when an import reaches a file that is already being
+executed as part of the current load chain. For example, if <code>main.vexa</code>
+imports <code>hello.vexa</code> and <code>hello.vexa</code> imports <code>main.vexa</code> at the top level,
+the interpreter reports <code>Circular import</code> with the file chain. Move shared
+definitions into a third module that both files can import.</p>
+<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>
+<thead>
+<tr>
+  <th>Error</th>
+  <th>What to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Module not found</td>
+  <td>Check the filename, spelling, and folder relative to the file containing the import. Use <code>tools.hello</code> for <code>tools/hello.vexa</code>.</td>
+</tr>
+<tr>
+  <td>Module has no member</td>
+  <td>Check that the name exists in the module scope after initialization. Function-local variables and built-ins inherited from the runtime are outside that scope.</td>
+</tr>
+<tr>
+  <td>Duplicate binding</td>
+  <td>Each imported name must be unique in its destination scope. Use <code>as</code> when an import would reuse a local name.</td>
+</tr>
+<tr>
+  <td>Module namespace bindings are read-only</td>
+  <td>Call a module function to change its own binding.</td>
+</tr>
+<tr>
+  <td>Syntax error</td>
+  <td>Use the final period, omit the file suffix, and supply an identifier after <code>as</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Imports target Vexa files. Wildcards, parent-directory paths, and package
+initializers are unsupported. Optional libraries still use <code>use</code>, as in
+<code>use numpy.</code>. VS Code checks import syntax. File resolution, missing members,
+and circular imports are diagnosed when you run the program.</p>
+      </article>
+    </div>
+  </main>
   <footer>Vexa · Created by Avyukt Gupta · <a href="https://github.com/Avyukt-Gupta2012/Vexa/releases">View releases</a></footer>
+  <script>
+    const home = document.getElementById("home");
+    const docs = document.getElementById("docs");
+    const documentationLink = document.getElementById("documentation-link");
+    const homeTitle = document.title;
+
+    function showPage() {
+      const hash = window.location.hash;
+      const showingDocs = hash === "#docs" || hash.startsWith("#docs-");
+      const viewChanged = docs.hidden === showingDocs;
+
+      home.hidden = showingDocs;
+      docs.hidden = !showingDocs;
+      document.title = showingDocs ? "Learning Vexa — Documentation" : homeTitle;
+      if (showingDocs) {
+        documentationLink.setAttribute("aria-current", "page");
+      } else {
+        documentationLink.removeAttribute("aria-current");
+      }
+
+      if (viewChanged) {
+        (showingDocs ? docs : home).focus({ preventScroll: true });
+        const section = showingDocs && document.getElementById(hash.slice(1));
+        if (section && section !== docs) {
+          section.scrollIntoView();
+        } else {
+          window.scrollTo(0, 0);
+        }
+      }
+    }
+
+    window.addEventListener("hashchange", showPage);
+    showPage();
+  </script>
 </body>
 </html>
